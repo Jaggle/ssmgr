@@ -33,6 +33,11 @@ app.config(['$stateProvider', $stateProvider => {
       url: '/password/reset/:token',
       controller: 'HomeResetPasswordController',
       templateUrl: `${ cdn }/public/views/home/resetPassword.html`,
+    })
+    .state('home.price', {
+      url: '/price',
+      controller: 'HomePriceController',
+      templateUrl: `${ cdn }/public/views/home/price.html`
     });
   }
 ]);

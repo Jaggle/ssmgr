@@ -32,6 +32,10 @@ app
         name: '注册',
         icon: 'face',
         click: 'home.signup'
+      }, {
+        name: '价格',
+        icon: 'face',
+        click : 'home.price'
       }];
       $scope.menuClick = (index) => {
         $mdSidenav('left').close();
@@ -94,6 +98,11 @@ app
           $scope.login();
         }
       };
+    }
+  ])
+  .controller('HomePriceController', ['$scope',
+    ($scope) => {
+     // $scope.setTitle('价格');
     }
   ])
   .controller('HomeSignupController', ['$scope', '$state', '$interval', '$timeout', 'homeApi', 'alertDialog',
