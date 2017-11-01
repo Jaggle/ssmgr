@@ -28,19 +28,23 @@ app
       }
     };
     $scope.menus = [{
-      name: '首页',
-      icon: 'home',
-      click: 'user.index'
+        name: '首页',
+        icon: 'home',
+        click: 'user.index'
     }, {
-      name: '账号',
-      icon: 'account_circle',
-      click: 'user.account'
+        name: '账号',
+        icon: 'account_circle',
+        click: 'user.account'
     }, {
-      name: '设置',
-      icon: 'settings',
-      click: 'user.changePassword'
+        name: '设置',
+        icon: 'settings',
+        click: 'user.changePassword'
     }, {
-      name: 'divider',
+        name: 'divider',
+    }, {
+        name: '使用教程',
+        icon: 'settings',
+        click: 'user.faq'
     }, {
       name: '退出',
       icon: 'exit_to_app',
@@ -258,7 +262,8 @@ app
       };
     };
   }
-]).controller('UserChangePasswordController', ['$scope', '$state', 'userApi', 'alertDialog', '$http', '$localStorage',
+])
+.controller('UserChangePasswordController', ['$scope', '$state', 'userApi', 'alertDialog', '$http', '$localStorage',
   ($scope, $state, userApi, alertDialog, $http, $localStorage) => {
     $scope.setTitle('设置');
     $scope.data = {
@@ -282,4 +287,5 @@ app
       });
     };
   }
-]);
+])
+.controller('UserFaqController', ['$scope', ($scope) => { $scope.setTitle('使用教程'); }]);

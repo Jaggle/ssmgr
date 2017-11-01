@@ -23,6 +23,11 @@ app.config(['$stateProvider', $stateProvider => {
       url: '/changePassword',
       controller: 'UserChangePasswordController',
       templateUrl: `${ cdn }/public/views/user/changePassword.html`,
-    });
+    })
+    .state('user.faq', {
+      url: '/faq',
+      controller: 'UserFaqController',
+      templateUrl: `${ cdn }/public/views/user/faq.html`,
+      });
   }])
 ;
