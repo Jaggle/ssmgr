@@ -11,7 +11,7 @@
     var accountId =  '<%= accountId%>';
     var url = 'http://codepay.fateqq.com:52888/creat_order/?price=_gPRICE_&pay_id=_gPAYID_&type=1&token=bEvs1AqbG2ChL4Inj9PXzCTXXBbRHhnE&act=0&id=14010&debug=1&pay_type=1&notify_url=http://vpn.geekerism.com/api/user/order/pay-notice&return_url=http://vpn.geekerism.com/user/account';
 
-    url = url.replace('_gPRICE', price).replace('_gPAYID_', accountId);
+    url = url.replace('_gPRICE_', price).replace('_gPAYID_', accountId);
     window.location.href = url;
 </script>
 </body>
