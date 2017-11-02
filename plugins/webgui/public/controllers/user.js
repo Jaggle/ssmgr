@@ -36,6 +36,10 @@ app
         icon: 'account_circle',
         click: 'user.account'
     }, {
+        name: '购买',
+        icon: 'account_circle',
+        click: 'user.buy'
+    }, {
         name: '设置',
         icon: 'settings',
         click: 'user.changePassword'

@@ -40,6 +40,7 @@
     <script src="<%= cdn%>/libs/marked.min.js"></script>
     <script src="<%= cdn%>/libs/angular-marked.min.js"></script>
     <script src="<%= cdn%>/libs/angular-translate.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
     <script>
         window.ssmgrVersion = '<%= version%>'
         window.cdn = '<%= cdn%>'
@@ -55,6 +56,26 @@
         ga('send', 'pageview');
     </script>
     <% } %>
+
+
+    <script>
+        function selectPrice(price) {
+            window.price=price;
+
+            $('li[data-price="'+price+'"]').css('border', '2px solid green')
+                .siblings().css('border', '2px solid #fff')
+        }
+
+        function jump() {
+            if (!window.price) {
+                alert('请先选择价格');
+                return false;
+            }
+
+            window.open('/buy-product?price='+window.price);
+        }
+    </script>
+
     <script src="/libs/bundle.js"></script>
     <div ng-controller="MainController" layout-fill>
         <div layout-fill layout="row" layout-align="center center" ng-show="mainLoading">

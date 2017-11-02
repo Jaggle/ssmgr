@@ -24,38 +24,22 @@
 
 
             <ul>
-                <li class="leng-detail st_hk">
+                <li class="leng-detail st_hk" onclick="selectPrice(5)" data-price="5">
                     1个月/5元
                 </li>
-                <li class="leng-detail st_hk">
+                <li class="leng-detail st_hk" onclick="selectPrice(14)" data-price="14">
                     3个月/14元
                 </li>
-                <li class="leng-detail st_hk">
+                <li class="leng-detail st_hk" onclick="selectPrice(28)" data-price="28">
                     半年/28元
                 </li>
-                <li class="leng-detail st_hk">
+                <li class="leng-detail st_hk" onclick="selectPrice(55)" data-price="55">
                     一年/55元
                 </li>
             </ul>
 
-            <button class="md-raised md-primary md-button md-ink-ripple buy">点击支付</button>
+            <button class="md-raised md-primary md-button md-ink-ripple buy" onclick="jump()">点击支付</button>
 
-            <script>
-                $('ul li.leng-detail').click(function () {
-                    window.price=5;
-                    $(this).css('border', '2px solid green')
-                        .siblings().css('border', '2px solid #fff')
-                });
-
-                $('button.buy').click(function () {
-                    if (!window.price) {
-                        alert('请先选择价格');
-                        return false;
-                    }
-
-                    window.location.href = '/buy-product?price='+window.price;
-                })
-            </script>
 
         </div>
         <div flex="2" flex-gt-sm="30"></div>

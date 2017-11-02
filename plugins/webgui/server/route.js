@@ -262,7 +262,7 @@ app.get('/', homePage);
 app.get(/^\/home\//, homePage);
 app.get(/^\/admin\//, homePage);
 app.get(/^\/user\//, homePage);
-app.get(/^\/bug-product/, buyProduct);
+app.get(/^\/buy-product/, buyProduct);
 
 app.get('/serviceworker.js', (req, res) => {
   return knex('webguiSetting').select().where({
