@@ -44,6 +44,29 @@ const changePort = async (id, port) => {
   await checkAccount.checkServer();
 };
 
+const increaseDays = async (id, count) => {
+    const account = await knex('account_plugin').select().where({ id }).then(success => {
+        if(success.length) {
+            return success[0];
+        }
+        return Promise.reject('account not found');
+    });
+
+    const accountData = JSON.parse(account.data);
+
+    const _accountData = JSON.stringify({
+        create: accountData.create,
+        flow: accountData.flow,
+        limit: accountData.limit*1 + count,
+    });
+
+    await knex('account_plugin').update({
+        data: JSON.stringify(_accountData),
+    }).where({ id });
+
+    return;
+};
+
 const getAccount = async (options = {}) => {
   const where = {};
   if(options.id) {
@@ -352,3 +375,4 @@ exports.changePort = changePort;
 exports.addAccountLimit = addAccountLimit;
 exports.addAccountLimitToMonth = addAccountLimitToMonth;
 exports.setAccountLimit = setAccountLimit;
+exports.increaseDays = increaseDays;

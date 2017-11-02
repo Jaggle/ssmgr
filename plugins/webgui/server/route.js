@@ -3,6 +3,7 @@ const app = appRequire('plugins/webgui/index').app;
 const sessionParser = appRequire('plugins/webgui/index').sessionParser;
 const home = appRequire('plugins/webgui/server/home');
 const user = appRequire('plugins/webgui/server/user');
+const account = appRequire('plugins/account/index');
 const admin = appRequire('plugins/webgui/server/admin');
 const adminUser = appRequire('plugins/webgui/server/adminUser');
 const adminServer = appRequire('plugins/webgui/server/adminServer');
@@ -123,6 +124,7 @@ app.get('/api/user/multiServerFlow', isUser, user.getMultiServerFlowStatus);
 app.get('/api/user/status/alipay', isUser, user.getAlipayStatus);
 
 app.get('/api/user/order/price', isUser, user.getPrice);
+app.post('/api/user/order/pay-notice', isUser, user.payNotice);
 app.post('/api/user/order/qrcode', isUser, user.createOrder);
 app.post('/api/user/order/status', isUser, user.checkOrder);
 
@@ -234,10 +236,33 @@ const homePage = (req, res) => {
     });
   });
 };
+
+const buyProduct = (req, res) => {
+    const userId = req.session.user;
+
+    account.getAccount({
+        userId,
+    }).then(success => {
+      const accountId = success[0].id; // 默认取一个
+      const price = req.query.price;
+
+        return res.render('buy-product', {
+            accountId: accountId,
+            price: price
+        });
+
+    }).catch(err => {
+        console.log(err);
+        res.status(500).end();
+    });
+};
+
+
 app.get('/', homePage);
 app.get(/^\/home\//, homePage);
 app.get(/^\/admin\//, homePage);
 app.get(/^\/user\//, homePage);
+app.get(/^\/bug-product/, buyProduct);
 
 app.get('/serviceworker.js', (req, res) => {
   return knex('webguiSetting').select().where({

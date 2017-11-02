@@ -272,6 +272,15 @@ exports.getPrice = (req, res) => {
   });
 };
 
+exports.payNotice = (req, res) => {
+    account.increaseDays(req.body.pay_id, parseInt((req.body.money*1)/5)); // FIXME 5块一个月,需要修改后续配置文件
+    return res.send({
+      code: 1,
+      msg: 'is ok!',
+      req:req.body
+  })
+};
+
 exports.getNotice = (req, res) => {
   knex('notice').select().orderBy('time', 'desc').then(success => {
     return res.send(success);

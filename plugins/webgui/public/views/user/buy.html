@@ -1,0 +1,63 @@
+<div layout="column">
+    <div flex="15"></div>
+    <div flex layout="row">
+        <div flex="2" flex-gt-sm="30"></div>
+        <div flex layout="column" layout-align="space-around stretch">
+
+            <style>
+                ul li.leng-detail {
+                    text-align: center;
+                    display: inline-block;
+                    width: 100px;
+                    padding: 20px;
+                    margin: 10px;
+                    height: 30px;
+                    background: #ddd;
+                    color: #000;
+                    border: 2px solid #fff;
+                    cursor: pointer;
+                }
+            </style>
+
+
+        <h2>选择套餐</h2>
+
+
+            <ul>
+                <li class="leng-detail st_hk">
+                    1个月/5元
+                </li>
+                <li class="leng-detail st_hk">
+                    3个月/14元
+                </li>
+                <li class="leng-detail st_hk">
+                    半年/28元
+                </li>
+                <li class="leng-detail st_hk">
+                    一年/55元
+                </li>
+            </ul>
+
+            <button class="md-raised md-primary md-button md-ink-ripple buy">点击支付</button>
+
+            <script>
+                $('ul li.leng-detail').click(function () {
+                    window.price=5;
+                    $(this).css('border', '2px solid green')
+                        .siblings().css('border', '2px solid #fff')
+                });
+
+                $('button.buy').click(function () {
+                    if (!window.price) {
+                        alert('请先选择价格');
+                        return false;
+                    }
+
+                    window.location.href = '/buy-product?price='+window.price;
+                })
+            </script>
+
+        </div>
+        <div flex="2" flex-gt-sm="30"></div>
+    </div>
+</div>

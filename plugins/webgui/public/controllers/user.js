@@ -288,4 +288,5 @@ app
     };
   }
 ])
-.controller('UserFaqController', ['$scope', ($scope) => { $scope.setTitle('使用教程'); }]);
+.controller('UserFaqController', ['$scope', ($scope) => { $scope.setTitle('使用教程'); }])
+.controller('UserBuyController', ['$scope', ($scope) => { $scope.setTitle('购买'); }]);

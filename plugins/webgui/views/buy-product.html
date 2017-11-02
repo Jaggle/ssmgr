@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购买</title>
+</head>
+<body>
+
+<script>
+    var price = '<%= price%>';
+    var accountId =  '<%= accountId%>';
+    var url = 'http://codepay.fateqq.com:52888/creat_order/?price=_gPRICE_&pay_id=_gPAYID_&type=1&token=bEvs1AqbG2ChL4Inj9PXzCTXXBbRHhnE&act=0&id=14010&debug=1&pay_type=1&return_url=';
+
+    url = url.replace('_gPRICE', price).replace('_gPAYID_', accountId);
+    window.location.href = url;
+</script>
+</body>
+</html>

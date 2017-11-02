@@ -28,6 +28,11 @@ app.config(['$stateProvider', $stateProvider => {
       url: '/faq',
       controller: 'UserFaqController',
       templateUrl: `${ cdn }/public/views/user/faq.html`,
-      });
+      })
+    .state('user.buy', {
+        url: '/buy',
+        controller: 'UserBuyController',
+        templateUrl: `${ cdn }/public/views/user/buy.html`
+    });
   }])
 ;
