@@ -142,24 +142,6 @@ exports.login = (req, res) => {
     req.session.user = success.id;
     req.session.type = success.type;
 
-
-    // 弄一个cookie吧
-    const userId = req.session.user;
-
-    account.getAccount({
-        userId,
-    }).then(success => {
-        success.forEach(f => {
-            f.data = JSON.parse(f.data);
-            if(f.type >= 2 && f.type <= 5) {
-                res.cookie('accountId', f.id);
-            }
-        });
-    }).catch(err => {
-        console.log(err);
-        res.status(500).end();
-    });
-
     res.send({ type: success.type });
   }).catch(err => {
     logger.error(`User[${ req.body.email }] login fail: ${ err }`);

@@ -273,12 +273,15 @@ exports.getPrice = (req, res) => {
 };
 
 exports.payNotice = (req, res) => {
-  console.log('get new notice: userId' + req.body.pay_id);
 
-  const money = req.body.money*1;
+  let userId = req.body.pay_id;
+  let money = req.body.money;
   let date;
 
-  if (money >=5 && money < 14) {
+    console.log('get new notice,  userId: ' + userId + ', money: ' + money);
+
+
+    if (money >=5 && money < 14) {
      date = 30;
   } else if (money >= 14 && money < 28) {
      date = 30*3;
@@ -288,14 +291,15 @@ exports.payNotice = (req, res) => {
      date = 356;
   } else {
 
-      console.log('increase day error: userId' + req.body.pay_id+ ', day: '+ date);
+      console.log('increase day error, userId: ' + userId + ', day: '+ date);
 
-      return res.send({code:0, msg: 'money error' + money});
+      return res.send({code:0, msg: 'money error: ' + money});
   }
 
     account.increaseDays(req.body.pay_id, date); // FIXME 5块一个月,需要修改后续配置文件
 
-    console.log('increase day ok: userId' + req.body.pay_id+ ', day: '+ date);
+    console.log('increase day ok, userId:' + req.body.pay_id + ', day: '+ date);
+
     return res.send({
       code: 1,
       msg: 'is ok!',

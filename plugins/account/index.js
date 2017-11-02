@@ -54,14 +54,17 @@ const increaseDays = async (id, count) => {
 
     const accountData = JSON.parse(account.data);
 
-    const _accountData = JSON.stringify({
+    let _accountData = JSON.stringify({
         create: accountData.create,
         flow: accountData.flow,
-        limit: accountData.limit*1 + count,
+        limit: accountData.limit ? parseInt(accountData.limit) + count : count,
     });
 
+    console.log(accountData);
+    console.log('current day: ' + (accountData.limit ? parseInt(accountData.limit) + count : count));
+
     await knex('account_plugin').update({
-        data: JSON.stringify(_accountData),
+        data: _accountData,
     }).where({ id });
 
     return;
