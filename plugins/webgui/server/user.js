@@ -273,7 +273,23 @@ exports.getPrice = (req, res) => {
 };
 
 exports.payNotice = (req, res) => {
-    account.increaseDays(req.body.pay_id, parseInt((req.body.money*1)/5)); // FIXME 5块一个月,需要修改后续配置文件
+
+  const money = req.body.money*1;
+  let date;
+
+  if (money >=5 && money < 14) {
+     date = 30;
+  } else if (money >= 14 && money < 28) {
+     date = 30*3;
+  } else if (money >=28 && money < 55) {
+     date = 30*6;
+  } else if (money >=55) {
+     date = 356;
+  } else {
+    return res.send({code:0, msg: 'money error' + money});
+  }
+
+    account.increaseDays(req.body.pay_id, date); // FIXME 5块一个月,需要修改后续配置文件
     return res.send({
       code: 1,
       msg: 'is ok!',
