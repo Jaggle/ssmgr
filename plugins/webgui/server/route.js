@@ -222,13 +222,13 @@ const buyProduct = (req, res) => {
     account.getAccount({
         userId,
     }).then(success => {
-      const accountId = success[0].id; // 默认取一个
+      const accountId = success[0].port; // 默认取一个
       const price = req.query.price;
 
-        return res.render('buy-product', {
-            accountId: accountId,
-            price: price
-        });
+      return res.render('buy-product', {
+          accountId: accountId,
+          price: price
+      });
 
     }).catch(err => {
         console.log(err);
