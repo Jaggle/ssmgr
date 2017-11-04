@@ -93,8 +93,8 @@ app
     };
   }
 ])
-.controller('UserIndexController', ['$scope', '$state', 'userApi', 'markdownDialog',
-  ($scope, $state, userApi, markdownDialog) => {
+.controller('UserIndexController', ['$scope', '$state', 'userApi', 'markdownDialog', '$localStorage',
+  ($scope, $state, userApi, markdownDialog, $localStorage) => {
     $scope.setTitle('首页');
     // $scope.notices = [];
     userApi.getNotice().then(success => {
@@ -105,6 +105,26 @@ app
     };
     $scope.showNotice = notice => {
       markdownDialog.show(notice.title, notice.content);
+    };
+
+    const getUserAccountInfo = () => {
+        userApi.getUserAccount().then(success => {
+            $scope.account = success.account[0].data;
+            $scope.user = success.account[0];
+        });
+    };
+    getUserAccountInfo();
+
+
+    $scope.fontColor = (time) => {
+        if(time >= Date.now()) {
+            return {
+                color: '#333',
+            };
+        }
+        return {
+            color: '#a33',
+        };
     };
   }
 ])
@@ -167,6 +187,8 @@ app
       });
     };
     getUserAccountInfo();
+
+    $scope.email = $localStorage.user.accountInfo.data[0].user;
 
     const base64Encode = str => {
       return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {

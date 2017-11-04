@@ -15,13 +15,24 @@
         </md-list>
     </md-card-content>
 </md-card>
-<md-card ng-click="toMyAccount()">
+<md-card>
     <md-card-title>
         <md-card-title-text><span class="md-headline">{{ '账号' | translate }}</span></md-card-title-text>
     </md-card-title>
     <md-card-content>
+        <md-list role="list">
+            <md-list-item role="listitem" class="md-no-proxy _md"> 帐号名：{{ user.user }} ({{ user.port }})</md-list-item>
+            <md-divider></md-divider>
+            <md-list-item role="listitem" class="md-no-proxy _md">到期时间：
+                <span ng-if="user.type === 1" translate>不限时</span>
+                <span ng-if="user.type >=2 && user.type <= 5">
+                    <span style="font-size: 0.9em;">{{account.expire | date : 'yyyy-MM-dd HH:mm'}}</span>
+                    <br><span style="font-size: 0.9em;" ng-style="{{fontColor(account.expire)}}">{{ account.expire | timeago | translateTime }}</span>
+                </span></md-list-item>
+            <md-divider></md-divider>
+        </md-list>
         <div style="text-align: center;">
-            <md-button class="md-primary">{{ '点击进入' | translate }}&gt;&gt;</md-button>
+            <md-button class="md-primary" ng-click="toMyAccount()">{{ '点击进入' | translate }}&gt;&gt;</md-button>
         </div>
     </md-card-content>
 </md-card>

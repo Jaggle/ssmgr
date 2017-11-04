@@ -134,6 +134,7 @@ module.exports = {
   '重复新密码': 'New password again',
 
   '购买': 'Buy',
-  '使用教程': 'Guidance'
+  '使用教程': 'Guidance',
 
+  '您好' : 'Hello'
 };
