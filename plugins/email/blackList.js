@@ -2175,7 +2175,7 @@ const blackList = [
   '@zzz.com',
 ];
 
-const isInBlackList = email => {
+const isInBlackList = (email) => {
   return blackList.filter(f => {
     return email.match(f);
   }).length > 0;

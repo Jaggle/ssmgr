@@ -6,6 +6,8 @@ const flow = appRequire('plugins/flowSaver/flow');
 const manager = appRequire('services/manager');
 const moment = require('moment');
 const cron = appRequire('init/cron');
+const emailPlugin = appRequire('plugins/email/index');
+
 let messages = [];
 
 const sendMessage = () => {
@@ -127,9 +129,14 @@ const checkServer = async () => {
         startTime += timePeriod;
       }
       if(data.create + data.limit * timePeriod <= Date.now() || data.create >= Date.now()) {
-        if(a.autoRemove) {
-          knex('account_plugin').delete().where({ id: a.id }).then();
+        if (a.hasSendExpireMail == 0) {
+          emailPlugin.sendAccountExpiredMail(a);
         }
+
+        //用户来之不易，不删除给他发送邮件通知
+        // if(a.autoRemove) {
+        //   knex('account_plugin').delete().where({ id: a.id }).then();
+        // }
       }
     }
   });

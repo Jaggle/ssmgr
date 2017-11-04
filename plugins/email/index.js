@@ -6,6 +6,8 @@ const rp = require('request-promise');
 const config = appRequire('services/config').all();
 const knex = appRequire('init/knex').knex;
 const isInBlackList = appRequire('plugins/email/blackList').isInBlackList;
+const accountModel = appRequire('plugins/account/index');
+const userModel = appRequire('plugins/user/index');
 
 let emailConfig;
 let transporter;
@@ -52,10 +54,6 @@ if(config.plugins.email.type === 'smtp') {
     });
   };
 }
-
-
-
-
 
 const sendMail = async (to, subject, text, options = {}) => {
   if(isInBlackList(to)) {
@@ -136,6 +134,33 @@ const sendCode = async (to, subject = 'subject', text, options = {}) => {
   }
 };
 
+const sendAccountExpiredMail = async (account) => {
+  if (account.hasSendExpireMail == 1) {
+    return null;
+  }
+
+  let userId = account.userId;
+
+  // console.log(account);
+
+  const user = await userModel.getOne(userId).then(success => {
+    return success;
+  });
+
+  try {
+    await sendMail(user.email, '绿灯帐号到期提醒', '您的帐号已经到期，未避免您的网络中断，请及时续费，祝科学上网愉快！', {
+      type: 'expire-notice'
+    });
+
+    accountModel.setExpireMailStatus(account.id, 1);
+
+    return true;
+  } catch (err) {
+      logger.error(`Send mail fail: ${ err }`);
+      return Promise.reject(err);
+  }
+};
+
 const checkCode = async (email, code) => {
   logger.info(`[${ email }] Check code: ${ code }`);
   const sendEmailTime = 10;
@@ -157,3 +182,4 @@ const checkCode = async (email, code) => {
 exports.checkCode = checkCode;
 exports.sendCode = sendCode;
 exports.sendMail = sendMail;
+exports.sendAccountExpiredMail = sendAccountExpiredMail;

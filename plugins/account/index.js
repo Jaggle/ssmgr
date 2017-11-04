@@ -70,6 +70,15 @@ const increaseDays = async (id, count) => {
     return;
 };
 
+const setExpireMailStatus = async (id, status) => {
+
+  await knex('account_plugin').update({
+    hasSendExpireMail: status,
+    }).where({ id });
+
+  return;
+};
+
 const getAccount = async (options = {}) => {
   const where = {};
   if(options.id) {
@@ -379,3 +388,4 @@ exports.addAccountLimit = addAccountLimit;
 exports.addAccountLimitToMonth = addAccountLimitToMonth;
 exports.setAccountLimit = setAccountLimit;
 exports.increaseDays = increaseDays;
+exports.setExpireMailStatus = setExpireMailStatus;
