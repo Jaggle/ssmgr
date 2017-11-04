@@ -3,7 +3,6 @@
     <div flex layout="row">
         <div flex="2" flex-gt-sm="30"></div>
         <div flex layout="column" layout-align="space-around stretch">
-
             <style>
                 ul li.leng-detail {
                     text-align: center;
@@ -18,11 +17,7 @@
                     cursor: pointer;
                 }
             </style>
-
-
-        <h2>选择套餐</h2>
-
-
+            <h2>选择套餐</h2>
             <ul>
                 <li class="leng-detail st_hk" onclick="selectPrice(5)" data-price="5">
                     1个月/5元
@@ -40,7 +35,12 @@
 
             <button class="md-raised md-primary md-button md-ink-ripple buy" onclick="jump()">点击支付</button>
 
-
+            <div style="font-size: 12px;color: coral">
+                <ul>
+                    <li>支付时请备注您的帐号，以便我们进行核对，谢谢！</li>
+                    <li>如果支付后没有自动续费，请联系我们的客服，我们会尽快处理</li>
+                </ul>
+            </div>
         </div>
         <div flex="2" flex-gt-sm="30"></div>
     </div>
