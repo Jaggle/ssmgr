@@ -34,7 +34,7 @@ app
         click: 'home.signup'
       }, {
         name: '价格',
-        icon: 'face',
+        icon: 'attach_money',
         click : 'home.price'
       }];
       $scope.menuClick = (index) => {
