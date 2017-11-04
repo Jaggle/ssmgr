@@ -133,4 +133,7 @@ module.exports = {
   '新密码': 'New password',
   '重复新密码': 'New password again',
 
+  '购买': 'Buy',
+  '使用教程': 'Guidance'
+
 };

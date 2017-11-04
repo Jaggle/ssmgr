@@ -37,7 +37,7 @@ app
         click: 'user.account'
     }, {
         name: '购买',
-        icon: 'account_circle',
+        icon: 'attach_money',
         click: 'user.buy'
     }, {
         name: '设置',
@@ -47,7 +47,7 @@ app
         name: 'divider',
     }, {
         name: '使用教程',
-        icon: 'settings',
+        icon: 'cloud',
         click: 'user.faq'
     }, {
       name: '退出',
