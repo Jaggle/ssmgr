@@ -135,6 +135,7 @@ module.exports = {
 
   '购买': 'Buy',
   '使用教程': 'Guidance',
+  '价格': 'Price',
 
   '您好' : 'Hello'
 };
