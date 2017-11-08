@@ -107,6 +107,7 @@ exports.signup = (req, res) => {
             limit: newUserAccount.limit || 8,
             flow: (newUserAccount.flow ? newUserAccount.flow : 350) * 1000000,
             autoRemove: 0,
+            server: [5, 8] // 只允许访问试用节点
           });
         });
       });

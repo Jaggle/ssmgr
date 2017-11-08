@@ -432,7 +432,10 @@ exports.getAccountIpFromAllServer = (req, res) => {
       });
     };
     const promiseArray = servers.map(server => {
-      return getIp(accountInfo.port, server).catch(err => []);
+      let oneIp;
+      oneIp = getIp(accountInfo.port, server).catch(err => []);
+      console.log('query ip: ', oneIp);
+      return oneIp;
     });
     return Promise.all(promiseArray);
   }).then(ips => {
