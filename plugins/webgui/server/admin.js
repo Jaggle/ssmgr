@@ -439,6 +439,7 @@ exports.getAccountIpFromAllServer = (req, res) => {
     });
     return Promise.all(promiseArray);
   }).then(ips => {
+    console.log('all ip: ', ips);
     const result = [];
     ips.forEach(ip => {
       ip.forEach(i => {
