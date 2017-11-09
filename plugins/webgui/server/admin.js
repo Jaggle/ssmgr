@@ -13,6 +13,10 @@ const isAlipayUse = config.plugins.alipay && config.plugins.alipay.use;
 const isPaypalUse = config.plugins.paypal && config.plugins.paypal.use;
 const rp = require('request-promise');
 
+exports.pay = (req, res) => {
+  //
+};
+
 exports.getAccount = (req, res) => {
   account.getAccount().then(success => {
     success.forEach(account => {

@@ -11,6 +11,7 @@ const adminFlow = appRequire('plugins/webgui/server/adminFlow');
 const adminSetting = appRequire('plugins/webgui/server/adminSetting');
 const adminNotice = appRequire('plugins/webgui/server/adminNotice');
 const adminAccount = appRequire('plugins/webgui/server/adminAccount');
+const alipay = appRequire('plugins/alipay/index');
 const push = appRequire('plugins/webgui/server/push');
 const os = require('os');
 const path = require('path');
@@ -52,6 +53,7 @@ app.put('/api/admin/server/:serverId(\\d+)', isAdmin, adminServer.editServer);
 app.delete('/api/admin/server/:serverId(\\d+)', isAdmin, adminServer.deleteServer);
 
 app.get('/api/admin/account', isAdmin, admin.getAccount);
+app.get('/api/admin/pay', isAdmin, admin.pay);
 app.get('/api/admin/account/port/:port(\\d+)', isAdmin, admin.getAccountByPort);
 app.get('/api/admin/account/:accountId(\\d+)', isAdmin, admin.getOneAccount);
 app.get('/api/admin/account/:serverId(\\d+)/:accountId(\\d+)/ip', isAdmin, admin.getAccountIp);
@@ -225,10 +227,12 @@ const buyProduct = (req, res) => {
       const accountId = success[0].port; // 默认取一个
       const price = req.query.price;
 
-      return res.render('buy-product', {
-          accountId: accountId,
-          price: price
-      });
+        alipay.createTmpOrder(userId, accountId, price);
+
+        return res.render('buy-product', {
+            accountId: accountId,
+            price: price
+        });
 
     }).catch(err => {
         console.log(err);

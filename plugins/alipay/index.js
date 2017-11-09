@@ -79,6 +79,22 @@ const createOrder = async (user, account, amount, orderType = 3) => {
   };
 };
 
+/**
+ * 创建临时的订单
+ */
+const createTmpOrder = async(userId, accountId, amount) => {
+  await knex('alipay').insert({
+      orderId: moment().format('YYYY-MMDD-HH-mm-ss-') + Math.random().toString().substr(2, 6),
+      orderType: 0,
+      account: accountId,
+      user: userId,
+      qrcode: '',
+      amount: amount,
+      status: 'CREATE',
+      createTime: Date.now(),
+  });
+};
+
 const sendSuccessMail = async userId => {
   const emailPlugin = appRequire('plugins/email/index');
   const user = await knex('user').select().where({
@@ -254,3 +270,4 @@ exports.orderList = orderList;
 exports.createOrder = createOrder;
 exports.checkOrder = checkOrder;
 exports.verifyCallback = verifyCallback;
+exports.createTmpOrder = createTmpOrder;
