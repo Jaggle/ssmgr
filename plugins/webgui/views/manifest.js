@@ -6,22 +6,22 @@ const manifest = {
   name: 'Shadowsocks-Manager',
   icons: [
     {
-      src: 'http://static.yeskn.com/greentern/favicon.png',
+      src: 'https://static.yeskn.com/greentern/favicon.png',
       type: 'image/png',
       sizes: '48x48'
     },
     {
-      src: 'http://static.yeskn.com/greentern/favicon.png',
+      src: 'https://static.yeskn.com/greentern/favicon.png',
       type: 'image/png',
       sizes: '128x128'
     },
     {
-      src: 'http://static.yeskn.com/greentern/favicon.png',
+      src: 'https://static.yeskn.com/greentern/favicon.png',
       type: 'image/png',
       sizes: '144x144'
     },
     {
-      src: 'http://static.yeskn.com/greentern/favicon.png',
+      src: 'https://static.yeskn.com/greentern/favicon.png',
       type: 'image/png',
       sizes: '256x256'
     }
