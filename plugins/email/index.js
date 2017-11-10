@@ -134,8 +134,8 @@ const sendCode = async (to, subject = 'subject', text, options = {}) => {
   }
 };
 
-const sendAccountExpiredMail = async (account) => {
-  if (account.hasSendExpireMail == 1) {
+const sendAccountExpiredMail = async (account, msg) => {
+  if (account.hasSendExpireMail*1 === 1) {
     return null;
   }
 
@@ -148,7 +148,7 @@ const sendAccountExpiredMail = async (account) => {
   });
 
   try {
-    await sendMail(user.email, '绿灯帐号到期提醒', '您的帐号已经到期，未避免您的网络中断，请及时续费，祝科学上网愉快！', {
+    await sendMail(user.email, msg || '绿灯帐号到期提醒', '您的帐号已经到期，未避免您的网络中断，请及时续费，祝科学上网愉快！', {
       type: 'expire-notice'
     });
 

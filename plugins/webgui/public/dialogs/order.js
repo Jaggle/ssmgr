@@ -2,7 +2,7 @@ const app = angular.module('app');
 const window = require('window');
 const cdn = window.cdn || '';
 
-app.factory('orderDialog', [ '$mdDialog', '$state', ($mdDialog, $state) => {
+app.factory('orderDialog', [ '$mdDialog', '$state', '$http', ($mdDialog, $state, $http) => {
   const publicInfo = {};
   const hide = () => {
     return $mdDialog.hide()
@@ -14,6 +14,19 @@ app.factory('orderDialog', [ '$mdDialog', '$state', ($mdDialog, $state) => {
       return;
     });
   };
+
+  publicInfo.prompt = (orderId) => {
+    let pwd = prompt('请输入操作密码');
+
+    if (pwd === 'yes') {
+        $http.post('/api/admin/pay', {
+            orderId: orderId
+        }).then(() => {
+            $state.go('admin.index');
+        });
+    }
+  };
+
   publicInfo.hide = hide;
   const toUserPage = userId => {
     hide();

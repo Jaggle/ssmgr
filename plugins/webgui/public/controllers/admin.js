@@ -171,13 +171,6 @@ app.controller('AdminController', ['$scope', '$mdMedia', '$mdSidenav', '$state',
     $scope.toUser = id => {
       $state.go('admin.userPage', { userId: id });
     };
-    $scope.pay = orderId => {
-        $http.post('/api/admin/pay', {
-          orderId: orderId
-        }).then(() => {
-            $state.go('admin.index');
-        });
-    };
     const updateIndexInfo = () => {
       adminApi.getIndexInfo().then(success => {
         $localStorage.admin.indexInfo = {
