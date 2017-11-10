@@ -133,6 +133,8 @@ const payTmpOrder = async (orderId) => {
       addFlow = 102400000000;
     }
 
+    let _limit = limit;
+
     const _account = await knex('account_plugin').select().where({port: aliOrder.account}).then(success => {
       if (success.length) {
         return success[0];
@@ -177,7 +179,7 @@ const payTmpOrder = async (orderId) => {
     }
 
     // 发送邮件
-    email.sendAccountExpiredMail(_account, '您的续期' + limit + "已到账！\n\n https://www.greentern.net");
+    email.sendAccountExpiredMail(_account, '您的续期' + _limit + "天已到账！\n\n https://www.greentern.net");
 
     return knex('alipay').update({ status: 'FINISH' }).where({
         orderId: orderId,
