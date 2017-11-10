@@ -113,6 +113,10 @@ const payTmpOrder = async (orderId) => {
       return Promise.reject('order not found');
     });
 
+    if (aliOrder.status === 'CREATE') {
+        return Promise.reject('order is handled!');
+    }
+
     console.log(aliOrder);
 
     let amount = parseInt(aliOrder.amount), limit, addFlow;
