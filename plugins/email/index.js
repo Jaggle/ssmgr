@@ -135,9 +135,6 @@ const sendCode = async (to, subject = 'subject', text, options = {}) => {
 };
 
 const sendAccountExpiredMail = async (account, msg) => {
-  if (account.hasSendExpireMail*1 === 1) {
-    return null;
-  }
 
   let userId = account.userId;
 

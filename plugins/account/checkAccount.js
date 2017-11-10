@@ -129,7 +129,7 @@ const checkServer = async () => {
         startTime += timePeriod;
       }
       if(data.create + data.limit * timePeriod <= Date.now() || data.create >= Date.now()) {
-        if (a.hasSendExpireMail == 0) {
+        if (a.hasSendExpireMail*1 === 0) {
           emailPlugin.sendAccountExpiredMail(a);
         }
 
