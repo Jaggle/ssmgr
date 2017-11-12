@@ -149,7 +149,7 @@ const payTmpOrder = async (orderId) => {
 
     let accountData = JSON.parse(_account.data), create;
 
-    if (parseInt(accountData.create) + parseInt(accountData.limit*24*60*60) < parseInt(Date.now())) {
+    if (parseInt(accountData.create) + parseInt(accountData.limit*24*60*60*1000) < parseInt(Date.now())) {
       create = Date.now();
     } else {
       create = accountData.create;
