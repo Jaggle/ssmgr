@@ -113,7 +113,7 @@ const payTmpOrder = async (orderId) => {
       return Promise.reject('order not found');
     });
 
-    if (aliOrder.status === 'CREATE') {
+    if (aliOrder.status === 'FINISH') {
         return Promise.reject('order is handled!');
     }
 
@@ -163,7 +163,7 @@ const payTmpOrder = async (orderId) => {
             limit: limit,
         }),
         server: null,
-        remark: _account.remark + ', ' +  moment().format('YYYY-MM-DD') + '付费' + amount
+        remark: (_account.remark ?  _account.remark + ', ' : '') +  moment().format('YYYY-MM-DD') + '付费' + amount
     }).where({port: aliOrder.account});
 
     console.log(res);
