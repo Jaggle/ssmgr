@@ -296,7 +296,7 @@ exports.payNotice = (req, res) => {
       return res.send({code:0, msg: 'money error: ' + money});
   }
 
-    account.increaseDays(req.body.pay_id, date); // FIXME 5块一个月,需要修改后续配置文件
+    account.increaseDays(userId, date); // FIXME 5块一个月,需要修改后续配置文件
 
     console.log('increase day ok, userId:' + req.body.pay_id + ', day: '+ date);
 
