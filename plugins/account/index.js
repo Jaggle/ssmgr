@@ -46,7 +46,7 @@ const changePort = async (id, port) => {
 };
 
 const increaseDays = async (id, count) => {
-    const account = await knex('account_plugin').select().where({ id }).then(success => {
+    const account = await knex('account_plugin').select().where({ port }).then(success => {
         if(success.length) {
             return success[0];
         }
