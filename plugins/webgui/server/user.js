@@ -300,11 +300,7 @@ exports.payNotice = (req, res) => {
 
     console.log('increase day ok, userId:' + req.body.pay_id + ', day: '+ date);
 
-    return res.send({
-      code: 1,
-      msg: 'is ok!',
-      req:req.body
-  })
+    return res.send('success')
 };
 
 exports.getNotice = (req, res) => {
