@@ -84,9 +84,9 @@ const createOrder = async (user, account, amount, orderType = 3) => {
 /**
  * 创建临时的订单
  */
-const createTmpOrder = async(userId, accountId, amount) => {
+const createTmpOrder = async (userId, accountId, amount) => {
   let orderId = moment().format('YYYY-MM-DD-HH-mm-ss-') + Math.random().toString().substr(2, 6);
-  await knex('alipay').insert({
+  knex('alipay').insert({
       orderId: orderId,
       orderType: 0,
       account: accountId,
