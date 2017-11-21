@@ -224,14 +224,15 @@ const buyProduct = (req, res) => {
     account.getAccount({
         userId,
     }).then(success => {
-      const accountId = success[0].port; // 默认取一个
-      const price = req.query.price;
+        const accountId = success[0].port; // 默认取一个
+        const price = req.query.price;
 
-        alipay.createTmpOrder(userId, accountId, price);
+        let orderId = alipay.createTmpOrder(userId, accountId, price);
 
         return res.render('buy-product', {
             accountId: accountId,
-            price: price
+            price: price,
+            param: orderId
         });
 
     }).catch(err => {

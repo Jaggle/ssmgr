@@ -274,33 +274,10 @@ exports.getPrice = (req, res) => {
 
 exports.payNotice = (req, res) => {
 
-  let userId = req.body.pay_id;
-  let money = req.body.money;
-  let date;
+  let orderId = req.body.param;
+  alipay.payTmpOrder(orderId);
 
-    console.log('get new notice,  userId: ' + userId + ', money: ' + money);
-
-
-    if (money >=5 && money < 14) {
-     date = 30;
-  } else if (money >= 14 && money < 28) {
-     date = 30*3;
-  } else if (money >=28 && money < 55) {
-     date = 30*6;
-  } else if (money >=55) {
-     date = 356;
-  } else {
-
-      console.log('increase day error, userId: ' + userId + ', day: '+ date);
-
-      return res.send({code:0, msg: 'money error: ' + money});
-  }
-
-    account.increaseDays(userId, date); // FIXME 5块一个月,需要修改后续配置文件
-
-    console.log('increase day ok, userId:' + req.body.pay_id + ', day: '+ date);
-
-    return res.send('success')
+  return res.send('success')
 };
 
 exports.getNotice = (req, res) => {
