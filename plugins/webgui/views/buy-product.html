@@ -9,7 +9,7 @@
 <script>
     var price = '<%= price%>';
     var accountId = '<%= accountId%>';
-    var url = 'http://codepay.fateqq.com:52888/creat_order/?price=_gPRICE_&pay_id=_gPAYID_&type=1&token=bEvs1AqbG2ChL4Inj9PXzCTXXBbRHhnE&act=0&id=14010&debug=0&pay_type=1&return_url=https://www.greentern.net/user/account';
+    var url = 'http://codepay.fateqq.com:52888/creat_order/?price=_gPRICE_&param=__PARAM__&pay_id=_gPAYID_&type=1&token=bEvs1AqbG2ChL4Inj9PXzCTXXBbRHhnE&act=0&id=14010&debug=0&pay_type=1&return_url=https://www.greentern.net/user/account';
     var param = '<%= param%>';
 
     url = url.replace('_gPRICE_', price).replace('_gPAYID_', accountId).replace('__PARAM__', param);
