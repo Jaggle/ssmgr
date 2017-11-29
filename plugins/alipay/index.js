@@ -86,7 +86,7 @@ const createOrder = async (user, account, amount, orderType = 3) => {
  */
 const createTmpOrder = async (userId, accountId, amount) => {
   let orderId = moment().format('YYYY-MM-DD-HH-mm-ss-') + Math.random().toString().substr(2, 6);
-  knex('alipay').insert({
+  await knex('alipay').insert({
       orderId: orderId,
       orderType: 0,
       account: accountId,
