@@ -1,6 +1,7 @@
 const manager = appRequire('services/manager');
 const serverManager = appRequire('plugins/flowSaver/server');
 const knex = appRequire('init/knex').knex;
+const checkAccount = appRequire('plugins/account/checkAccount');
 
 exports.getServers = (req, res) => {
   serverManager.list({
@@ -154,4 +155,9 @@ exports.deleteServer = (req, res) => {
     console.log(err);
     res.status(403).end();
   });
+};
+
+exports.checkAccount = async (req, res) => {
+  await checkAccount.checkServer();
+  res.send('ok');
 };
