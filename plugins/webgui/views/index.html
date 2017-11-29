@@ -52,6 +52,8 @@
                 alert('请先选择价格');
                 return false;
             }
+
+            alert("付款后大概3分钟左右生效\n如果提示付款5.01，请直接付款5元即可\n付款后可关闭付款页面");
             window.open('/buy-product?price='+window.price);
         }
         window.ssmgrVersion = '<%= version%>';window.cdn = '<%= cdn%>';window.ssmgrConfig = '<%- JSON.stringify(config)%>'
