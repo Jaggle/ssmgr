@@ -41,44 +41,6 @@
     <script src="https://static.yeskn.com/greentern/angular-marked.min.js"></script>
     <script src="https://static.yeskn.com/greentern/angular-translate.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
-    <script>
-        function selectPrice(price) {
-            window.price=price;
-            $('li[data-price="'+price+'"]').css('border', '2px solid green').siblings().css('border', '2px solid #fff')
-        }
-
-        function jump() {
-            if (!window.price) {
-                alert('请先选择价格');
-                return false;
-            }
-
-            alert("付款后大概3分钟左右生效\n如果提示付款5.01，请直接付款5元即可\n付款后可关闭付款页面");
-            window.open('/buy-product?price='+window.price);
-        }
-        window.ssmgrVersion = '<%= version%>';window.cdn = '<%= cdn%>';window.ssmgrConfig = '<%- JSON.stringify(config)%>'
-
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?8f601b0ce3cf3559051fbc73c6bccb9c";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-
-
-    <% if (analytics) { %>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
-        ga('create', '<%= analytics%>', 'auto');
-        ga('send', 'pageview');
-    </script>
-    <% } %>
-
     <script src="/libs/bundle.js"></script>
     <div ng-controller="MainController" layout-fill>
         <div layout-fill layout="row" layout-align="center center" ng-show="mainLoading">

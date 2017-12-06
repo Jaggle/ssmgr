@@ -23,7 +23,7 @@ require('./init/checkConfig');
 require('./init/knex');
 const manager = require('./services/manager');
 
-manager.send({command: 'version'}, {
+manager.send({command: 'add', port: 17804, password: '4957150165'}, {
     host: '45.32.123.118',
     port: 4001,
     password: '1991JakeSS`'
