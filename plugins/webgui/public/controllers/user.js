@@ -315,4 +315,11 @@ app
   }
 ])
 .controller('UserFaqController', ['$scope', ($scope) => { $scope.setTitle('使用教程'); }])
-.controller('UserBuyController', ['$scope', ($scope) => { $scope.setTitle('购买'); }]);
+.controller('UserBuyController', ['$scope', ($scope) => { $scope.setTitle('购买'); }])
+.controller('UserInviteController', ['$scope', '$http', ($scope, $http) => {
+  $scope.setTitle('推广');
+
+  $http.get('/api/user/invite').then(success => {
+    $scope.inviteInfo = success;
+  });
+}]);

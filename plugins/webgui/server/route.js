@@ -116,6 +116,9 @@ app.get('/api/admin/setting/mail', isAdmin, adminSetting.getMail);
 app.put('/api/admin/setting/mail', isAdmin, adminSetting.modifyMail);
 
 
+// jake
+app.get('/api/user/invite', isUser, user.getInviteInfo);
+
 app.get('/api/user/notice', isUser, user.getNotice);
 app.get('/api/user/account', isUser, user.getAccount);
 app.get('/api/user/account/:accountId(\\d+)', isUser, user.getOneAccount);

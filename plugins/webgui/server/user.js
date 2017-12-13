@@ -6,6 +6,7 @@ const emailPlugin = appRequire('plugins/email/index');
 const config = appRequire('services/config').all();
 
 const alipay = appRequire('plugins/alipay/index');
+const invite = appRequire('plugins/invite/index');
 
 exports.getAccount = (req, res) => {
   const userId = req.session.user;
@@ -375,4 +376,22 @@ exports.changePassword = (req, res) => {
     console.log(err);
     res.status(403).end();
   });
+};
+
+exports.getInviteInfo = (req, res) => {
+  const userId = req.session.user;
+
+  account.getAccount({ userId }).then(accounts => {
+    return accounts[0];
+  }).then(account => {
+    knex('invite_user').select(['id', 'code', 'type']).where({ port: account.port }).then(success => {
+      if (!success.length) {
+        invite.addInviteUser(account).then(success => {
+        return res.send(success);
+        });
+      } else {
+        return res.send(success[0]);
+      }
+    })
+  })
 };

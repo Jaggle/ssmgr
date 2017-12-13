@@ -30,9 +30,15 @@ app.config(['$stateProvider', $stateProvider => {
       templateUrl: `${ cdn }/public/views/user/faq.html`,
       })
     .state('user.buy', {
-        url: '/buy',
-        controller: 'UserBuyController',
-        templateUrl: `${ cdn }/public/views/user/buy.html`
-    });
+      url: '/buy',
+      controller: 'UserBuyController',
+      templateUrl: `${ cdn }/public/views/user/buy.html`
+    })
+    .state('user.invite', {
+      url: '/invite',
+      controller: 'UserInviteController',
+      templateUrl: `${ cdn }/public/views/user/invite.html`
+    })
+  ;
   }])
 ;
