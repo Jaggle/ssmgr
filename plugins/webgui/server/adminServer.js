@@ -157,8 +157,7 @@ exports.deleteServer = (req, res) => {
   });
 };
 
-exports.checkAccount = (req, res) => {
-  checkAccount.checkServer().then(success => {
-    res.send('ok');
-  });
+exports.checkAccount = async (req, res) => {
+  await checkAccount.checkServer();
+  return res.send('success');
 };

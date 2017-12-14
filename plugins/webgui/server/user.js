@@ -386,12 +386,18 @@ exports.getInviteInfo = (req, res) => {
   }).then(account => {
     knex('invite_user').select(['id', 'code', 'type']).where({ port: account.port }).then(success => {
       if (!success.length) {
-        invite.addInviteUser(account).then(success => {
-        return res.send(success);
+        return invite.addInviteUser(account).then(success => {
+          return success;
         });
       } else {
-        return res.send(success[0]);
+        return success[0];
       }
+    }).then(success => {
+      const userInfo = success;
+      invite.getInviteRecords(account.port).then(success => {
+        userInfo['records'] = success;
+        return res.send(userInfo);
+      })
     })
   })
 };

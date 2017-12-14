@@ -40,6 +40,10 @@ app
         icon: 'attach_money',
         click: 'user.buy'
     }, {
+       name: '推广',
+       icon: 'accessibility',
+       click: 'user.invite'
+    }, {
         name: '设置',
         icon: 'settings',
         click: 'user.changePassword'
@@ -321,5 +325,6 @@ app
 
   $http.get('/api/user/invite').then(success => {
     $scope.inviteInfo = success;
+    $scope.records = success.data.records;
   });
 }]);

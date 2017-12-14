@@ -36,7 +36,7 @@ const addAccount = async (type, options) => {
       server: options.server
     });
     await checkAccount.checkServer();
-    return;
+    return options.port;
   }
 };
 
