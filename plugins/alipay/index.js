@@ -105,92 +105,86 @@ const createTmpOrder = async (userId, accountId, amount) => {
  * 临时支付
  */
 const payTmpOrder = async (orderId) => {
+  const aliOrder = await knex('alipay').select().where({orderId: orderId}).then(success => {
+    if (success.length) {
+      return success[0];
+    }
+    return Promise.reject('order not found');
+  });
 
-    // 修改用户的过期时间
+  if (aliOrder.status === 'FINISH') {
+      return Promise.reject('order is handled!');
+  }
 
-    const aliOrder = await knex('alipay').select().where({orderId: orderId}).then(success => {
-      if (success.length) {
-        return success[0];
-      }
+  let amount = parseInt(aliOrder.amount), limit, addFlow;
 
-      return Promise.reject('order not found');
-    });
+  if (amount < 5) {
+      return Promise.reject('order amount: ' + amount + ' is bad');
+  } else if (amount >=5 && amount <14) {
+    limit = 30;
+    addFlow = 102400000000 / 2;
+  } else if (amount >=14 && amount <28) {
+    limit = 90;
+    addFlow = 102400000000 / 2;
+  } else if (amount >= 28 && amount < 55) {
+    limit = 180;
+    addFlow = 102400000000 / 2;
+  } else {
+    limit = 365;
+    addFlow = 102400000000;
+  }
 
-    if (aliOrder.status === 'FINISH') {
-        return Promise.reject('order is handled!');
+  let _limit = limit;
+
+  const _account = await knex('account_plugin').select().where({port: aliOrder.account}).then(success => {
+    if (success.length) {
+      return success[0];
     }
 
-    console.log(aliOrder);
+    return Promise.reject('account not found');
+  });
 
-    let amount = parseInt(aliOrder.amount), limit, addFlow;
+  let accountData = JSON.parse(_account.data), create;
 
-    if (amount < 5) {
-        return Promise.reject('order amount: ' + amount + ' is bad');
-    } else if (amount >=5 && amount <14) {
-      limit = 30;
-      addFlow = 102400000000 / 2;
-    } else if (amount >=14 && amount <28) {
-      limit = 90;
-      addFlow = 102400000000 / 2;
-    } else if (amount >= 28 && amount < 55) {
-      limit = 180;
-      addFlow = 102400000000 / 2;
-    } else {
-      limit = 365;
-      addFlow = 102400000000;
-    }
+  if (parseInt(accountData.create) + parseInt(accountData.limit*24*60*60*1000) < parseInt(Date.now())) {
+    create = Date.now();
+  } else {
+    create = accountData.create;
+    limit = accountData.limit + limit;
+  }
 
-    let _limit = limit;
+  const res = await knex('account_plugin').update({
+      data: JSON.stringify({
+          create: create,
+          flow: addFlow,
+          limit: limit,
+      }),
+      server: null,
+      remark: (_account.remark ?  _account.remark + ', ' : '')
+      + moment().format('YYYY-MM-DD')
+      + '付费'
+      + amount
+  }).where({port: aliOrder.account});
 
-    const _account = await knex('account_plugin').select().where({port: aliOrder.account}).then(success => {
+  await knex('account_plugin').select().where({port: aliOrder.account}).then(success => {
       if (success.length) {
         return success[0];
       }
 
       return Promise.reject('account not found');
-    });
+  });
 
-    let accountData = JSON.parse(_account.data), create;
+  if (!res) {
+      return Promise.reject('account update error');
+  }
 
-    if (parseInt(accountData.create) + parseInt(accountData.limit*24*60*60*1000) < parseInt(Date.now())) {
-      create = Date.now();
-    } else {
-      create = accountData.create;
-      limit = accountData.limit + limit;
-    }
+  // 发送邮件
+  await email.sendAccountExpiredMail(_account, '您的续期' + _limit + "天已到账！如果您的帐号是过期后续费，可能需要等待大概10分钟才能生效 \n\n https://www.greentern.net");
+  await account.checkServer();
 
-    const res = await knex('account_plugin').update({
-        data: JSON.stringify({
-            create: create,
-            flow: accountData.flow + addFlow,
-            limit: limit,
-        }),
-        server: null,
-        remark: (_account.remark ?  _account.remark + ', ' : '') +  moment().format('YYYY-MM-DD') + '付费' + amount
-    }).where({port: aliOrder.account});
-
-    console.log(res);
-
-    knex('account_plugin').select().where({port: aliOrder.account}).then(success => {
-        if (success.length) {
-          console.log(success);
-
-          return success[0];
-        }
-
-        return Promise.reject('account not found');
-    });
-
-    if (!res) {
-        return Promise.reject('account update error');
-    }
-
-    // 发送邮件
-    email.sendAccountExpiredMail(_account, '您的续期' + _limit + "天已到账！\n\n https://www.greentern.net");
-
-    return knex('alipay').update({ status: 'FINISH' }).where({
-        orderId: orderId,
-        status: 'CREATE'
+  return knex('alipay').update({ status: 'FINISH' }).where({
+    orderId: orderId,
+    status: 'CREATE'
     })
 };
 

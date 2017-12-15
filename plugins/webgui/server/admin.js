@@ -17,7 +17,6 @@ exports.payTmp = (req, res) => {
   const orderId = req.body.orderId;
 
   alipay.payTmpOrder(orderId);
-
   res.send('success');
 };
 
