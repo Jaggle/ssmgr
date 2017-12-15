@@ -3,7 +3,12 @@
         <md-card-title-text><span class="md-headline">{{ '邀请链接' | translate }}</span></md-card-title-text>
     </md-card-title>
     <md-card-content>
-        <p>您的邀请链接是：<input style="display: inline-block;width: 350px" type="text" value="https://www.greentern.net/?ref={{ inviteInfo.data.code }}"></p>
+        <div flex layout="row">
+            <div flex="12" style="margin-top: 25px">您的邀请链接是：</div>
+            <md-input-container class="md-block" flex="50">
+                <input type="url" value="https://www.greentern.net/?ref={{ inviteInfo.data.code }}">
+            </md-input-container>
+        </div>
     </md-card-content>
 </md-card>
 
