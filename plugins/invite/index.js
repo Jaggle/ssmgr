@@ -26,18 +26,19 @@ exports.getInviteRecords = async (fromPort) => {
 };
 
 exports.handleInvite = async (code, email, to_port) => {
-  email = email.substr(0, 3) + '****' + email.substr(-1, 3);
+  if (!code) return false;
+  email = email.substr(0, 3) + '****' + email.substr(-3, 3);
   const inviteUser = await knex('invite_user').where({code:code}).then(success => {
     if (success.length) {
       return success[0];
     }
   });
 
-  const from_port = inviteUser.port;
-
   if (!inviteUser) {
-    return Promise.reject('邀请人不存在');
+    return false;
   }
+
+  const from_port = inviteUser.port;
 
   await knex('invite_record').insert({
     code: code,
@@ -72,7 +73,7 @@ exports.handleInvite = async (code, email, to_port) => {
       }),
     }).where({port: from_port});
 
-  emailService.sendAccountExpiredMail(a, '用户 '+email+' 通过您的邀请码注册，因此您获得7天的免费会员！感谢您为绿灯做出的贡献！'
+  await emailService.sendAccountExpiredMail(a, '用户 '+email+' 通过您的邀请码注册，因此您获得7天的免费会员！感谢您为绿灯做出的贡献！'
       + "\n\n https://www.greentern.net");
 
   return true;

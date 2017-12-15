@@ -100,6 +100,7 @@ exports.signup = (req, res) => {
         //     port = success[0].port + 1;
         //   }
         getNewPort().then(port => {
+          invite.handleInvite(req.session.inviteCode, req.body.email, port);
           return account.addAccount(newUserAccount.type || 5, {
             user: userId,
             port,
@@ -107,8 +108,7 @@ exports.signup = (req, res) => {
             time: Date.now(),
             limit: newUserAccount.limit || 8,
             flow: (newUserAccount.flow ? newUserAccount.flow : 350) * 1000000,
-            autoRemove: 0,
-            server: [5, 8] // 只允许访问试用节点
+            autoRemove: 0
           });
         });
       });
@@ -117,7 +117,6 @@ exports.signup = (req, res) => {
     }
   }).then(success => {
     logger.info(`[${ req.body.email }] signup success`);
-    invite.handleInvite(req.session.inviteCode, req.body.email, success);
     push.pushMessage('注册', {
       body: `用户[ ${ req.body.email.toString().toLowerCase() } ]注册成功`,
     });
