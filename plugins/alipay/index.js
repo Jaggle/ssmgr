@@ -180,7 +180,7 @@ const payTmpOrder = async (orderId) => {
 
   // 发送邮件
   await email.sendAccountExpiredMail(_account, '您的续期' + _limit + "天已到账！如果您的帐号是过期后续费，可能需要等待大概10分钟才能生效 \n\n https://www.greentern.net");
-  await account.checkServer();
+  await account.checkServer(true);
 
   return knex('alipay').update({ status: 'FINISH' }).where({
     orderId: orderId,

@@ -107,10 +107,10 @@ const deleteCheckAccountTimeServer = serverId => {
 };
 
 let lastCheck = 0;
-const checkServer = async () => {
+const checkServer = async (force) => {
   if(!lastCheck) {
     lastCheck = Date.now();
-  } else if(Date.now() - lastCheck <= 29 * 1000) {
+  } else if(Date.now() - lastCheck <= 29 * 1000 && !force) {
     return;
   }
   lastCheck = Date.now();
