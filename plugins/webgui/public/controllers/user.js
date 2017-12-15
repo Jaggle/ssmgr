@@ -119,6 +119,10 @@ app
     };
     getUserAccountInfo();
 
+    if  (!window.hasShowDialog) {
+      window.hasShowDialog = 1;
+      markdownDialog.show("邀请功能已经开通", "请在左侧菜单点击「邀请」，如果没有该菜单，请刷新一下本地缓存，<br />目前邀请一个用户注册，可以获得7天免费会员，欢迎体验！");
+    }
 
     $scope.fontColor = (time) => {
         if(time >= Date.now()) {

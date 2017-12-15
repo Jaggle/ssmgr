@@ -13,6 +13,7 @@ const createTable = async() => {
         table.string('message');
         table.string('from_port'); // 注册人的端口
         table.string('to_port');  // 推广者的端口
+        table.string('add_days');
         table.string('time');
     });
 };
