@@ -101,7 +101,7 @@ exports.handleInvitePay = async (toPort, addDays) => {
   const toUser = await knex('account_plugin').select().where({port: toPort}).then(success => {
     return success[0];
   }).then(success => {
-    return knex('user').select().where({ id: success.id }).then(success => {
+    return knex('user').select().where({ id: success.userId }).then(success => {
       return success[0]
     });
   });
