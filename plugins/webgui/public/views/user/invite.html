@@ -3,11 +3,21 @@
         <md-card-title-text><span class="md-headline">{{ '邀请链接' | translate }}</span></md-card-title-text>
     </md-card-title>
     <md-card-content>
-        <div flex layout="row">
+        <div flex layout="row" style="height: 55px !important;">
             <div flex="12" style="margin-top: 25px">您的邀请链接是：</div>
             <md-input-container class="md-block" flex="50">
                 <input type="url" value="https://www.greentern.net/?ref={{ inviteInfo.data.code }}">
             </md-input-container>
+        </div>
+        <div flex layout="fow" style="font-size: 12px">
+            <b>邀请规则：</b>
+            <ol style="color: coral">
+                <li>邀请一个用户注册，增加7天</li>
+                <li>邀请的用户续费，得到该用户的1/6, 最少5天，最多60天</li>
+                <li>邀请的用户再邀请，不会增加您的会员天数</li>
+                <li>免费用户流量不会变成无限，依然为200M，请续费使用</li>
+                <li>以上规则处于试行状态，之后可能有所调整，调整后以新规则为准</li>
+            </ol>
         </div>
     </md-card-content>
 </md-card>
