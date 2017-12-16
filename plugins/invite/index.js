@@ -85,6 +85,19 @@ exports.handleInvite = async (code, email, to_port) => {
 };
 
 exports.handleInvitePay = async (toPort, addDays) => {
+  const inviteRecord =  await knex('invite_record').select('*').where({
+    to_port:toPort,
+    type: 1
+  }).then(success => {
+    if (success.length) {
+      return success[0];
+    }
+  });
+
+  if (!inviteRecord) {
+    return false;
+  }
+
   const toUser = await knex('account_plugin').select().where({port: toPort}).then(success => {
     return success[0];
   }).then(success => {
@@ -96,19 +109,6 @@ exports.handleInvitePay = async (toPort, addDays) => {
   let toEmail = toUser.email;
   toEmail = toEmail.substr(0, 3) + '****' + toEmail.substr(-3, 3);
 
-  const inviteRecord =  await knex('invite_record').select('*').where({
-    to_port:toPort,
-    type: 1
-  }).then(success => {
-    if (success.length) {
-      return success[0];
-    }
-  });
-
-  if (!inviteRecord) {
-    return Promise.reject('record not found') ;
-  }
-
   const fromPort = inviteRecord.from_port;
   const a =  await knex('account_plugin').select().where({port: fromPort}).then(success => {
     if (success.length) {
@@ -117,7 +117,7 @@ exports.handleInvitePay = async (toPort, addDays) => {
   });
 
   if (!a) {
-    return Promise.reject('account error');
+    return false;
   }
 
   let accountData = JSON.parse(a.data), create, limit;
