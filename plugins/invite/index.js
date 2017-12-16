@@ -1,6 +1,5 @@
 const knex = appRequire('init/knex').knex;
 const manager = appRequire('services/manager');
-const checkAccount = appRequire('plugins/account/checkAccount');
 const config = appRequire('services/config').all();
 const emailService = appRequire('plugins/email/index');
 

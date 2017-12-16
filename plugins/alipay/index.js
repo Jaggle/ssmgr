@@ -4,6 +4,7 @@ const cron = appRequire('init/cron');
 const config = appRequire('services/config').all();
 const alipayf2f = require('alipay-ftof');
 const email = appRequire('plugins/email/index');
+const checkAccount = appRequire('plugins/account/checkAccount');
 
 let alipay_f2f;
 if(config.plugins.alipay && config.plugins.alipay.use) {
@@ -180,7 +181,7 @@ const payTmpOrder = async (orderId) => {
 
   // 发送邮件
   await email.sendAccountExpiredMail(_account, '您的续期' + _limit + "天已到账！如果您的帐号是过期后续费，可能需要等待大概10分钟才能生效 \n\n https://www.greentern.net");
-  await account.checkServer(true);
+  await checkAccount.checkServer(true);
 
   return knex('alipay').update({ status: 'FINISH' }).where({
     orderId: orderId,
