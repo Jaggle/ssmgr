@@ -5,6 +5,7 @@ const config = appRequire('services/config').all();
 const alipayf2f = require('alipay-ftof');
 const email = appRequire('plugins/email/index');
 const checkAccount = appRequire('plugins/account/checkAccount');
+const inviteModel = appRequire('plugins/invite/index');
 
 let alipay_f2f;
 if(config.plugins.alipay && config.plugins.alipay.use) {
@@ -101,7 +102,6 @@ const createTmpOrder = async (userId, accountId, amount) => {
   return orderId;
 };
 
-
 /**
  * 临时支付
  */
@@ -167,14 +167,6 @@ const payTmpOrder = async (orderId) => {
       + amount
   }).where({port: aliOrder.account});
 
-  await knex('account_plugin').select().where({port: aliOrder.account}).then(success => {
-      if (success.length) {
-        return success[0];
-      }
-
-      return Promise.reject('account not found');
-  });
-
   if (!res) {
       return Promise.reject('account update error');
   }
@@ -182,8 +174,9 @@ const payTmpOrder = async (orderId) => {
   // 发送邮件
   await email.sendAccountExpiredMail(_account, '您的续期' + _limit + "天已到账！如果您的帐号是过期后续费，可能需要等待大概10分钟才能生效 \n\n https://www.greentern.net");
   await checkAccount.checkServer(true);
+  await inviteModel.handleInvitePay(aliOrder.account, parseInt(_limit/6));
 
-  return knex('alipay').update({ status: 'FINISH' }).where({
+  return await knex('alipay').update({ status: 'FINISH' }).where({
     orderId: orderId,
     status: 'CREATE'
     })

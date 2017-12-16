@@ -64,7 +64,7 @@ exports.handleInvite = async (code, email, to_port) => {
     limit = accountData.limit + 7;
   }
 
-  await knex('account_plugin').update({
+  const updateRes = await knex('account_plugin').update({
       data: JSON.stringify({
         create: create,
         flow: accountData.flow + 0,
@@ -72,7 +72,82 @@ exports.handleInvite = async (code, email, to_port) => {
       }),
     }).where({port: from_port});
 
+  console.log(updateRes, {
+    create: create,
+    flow: accountData.flow + 0,
+    limit: limit,
+  });
+
   await emailService.sendAccountExpiredMail(a, '用户 '+email+' 通过您的邀请码注册，因此您获得7天的免费会员！感谢您为绿灯做出的贡献！'
+      + "\n\n https://www.greentern.net");
+
+  return true;
+};
+
+exports.handleInvitePay = async (toPort, addDays) => {
+  const toUser = await knex('account_plugin').select().where({port: toPort}).then(success => {
+    return success[0];
+  }).then(success => {
+    return knex('user').select().where({ id: success.id }).then(success => {
+      return success[0]
+    });
+  });
+
+  let toEmail = toUser.email;
+  toEmail = toEmail.substr(0, 3) + '****' + toEmail.substr(-3, 3);
+
+  const inviteRecord =  await knex('invite_record').select('*').where({
+    to_port:toPort,
+    type: 1
+  }).then(success => {
+    if (success.length) {
+      return success[0];
+    }
+  });
+
+  if (!inviteRecord) {
+    return Promise.reject('record not found') ;
+  }
+
+  const fromPort = inviteRecord.from_port;
+  const a =  await knex('account_plugin').select().where({port: fromPort}).then(success => {
+    if (success.length) {
+      return success[0];
+    }
+  });
+
+  if (!a) {
+    return Promise.reject('account error');
+  }
+
+  let accountData = JSON.parse(a.data), create, limit;
+  if (parseInt(accountData.create) + parseInt(accountData.limit*24*60*60*1000) < parseInt(Date.now())) {
+    create = parseInt(Date.now());
+    limit= addDays;
+  } else {
+    create = accountData.create;
+    limit = accountData.limit + addDays;
+  }
+
+  await knex('account_plugin').update({
+    data: JSON.stringify({
+      create: create,
+      flow: accountData.flow + 0,
+      limit: limit,
+    }),
+  }).where({port: fromPort});
+
+  await knex('invite_record').insert({
+    code: inviteRecord.code,
+    type: 2,
+    message: '邀请的用户 '+toEmail+' 续费',
+    from_port: fromPort,
+    to_port: toPort,
+    time: parseInt(Date.now()),
+    add_days: addDays
+  });
+
+  await emailService.sendAccountExpiredMail(a, '用户 '+toEmail+' 通过您的邀请码注册并且续费, 因此您获得该用户续费天数的1/6, 即'+addDays+'天的免费会员！感谢您为绿灯做出的贡献！'
       + "\n\n https://www.greentern.net");
 
   return true;
