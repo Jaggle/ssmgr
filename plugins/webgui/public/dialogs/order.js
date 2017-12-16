@@ -20,9 +20,10 @@ app.factory('orderDialog', [ '$mdDialog', '$state', '$http', ($mdDialog, $state,
 
     if (pwd === 'yes') {
         $http.post('/api/admin/pay', {
-            orderId: orderId
+          orderId: orderId
         }).then(() => {
-            $state.go('admin.index');
+          hide();
+          $state.go('admin.index');
         });
     }
   };
