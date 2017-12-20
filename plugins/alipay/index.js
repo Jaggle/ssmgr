@@ -143,17 +143,15 @@ const payTmpOrder = async (orderId) => {
       return Promise.reject('order amount: ' + amount + ' is bad');
   } else if (amount >=5 && amount <14) {
     limit = 30;
-    addFlow = 102400000000 / 2;
   } else if (amount >=14 && amount <28) {
     limit = 90;
-    addFlow = 102400000000 / 2;
   } else if (amount >= 28 && amount < 55) {
     limit = 180;
-    addFlow = 102400000000 / 2;
   } else {
     limit = 365;
-    addFlow = 102400000000;
   }
+
+  addFlow = 1024000000 * 20; // 每天20G
 
   let _limit = limit;
 

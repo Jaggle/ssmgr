@@ -126,7 +126,7 @@ exports.handleInvitePay = async (toPort, addDays) => {
   await knex('account_plugin').update({
     data: JSON.stringify({
       create: create,
-      flow: accountData.flow + 0,
+      flow: accountData.flow,
       limit: limit,
     }),
   }).where({port: fromPort});
