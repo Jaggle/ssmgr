@@ -72,12 +72,6 @@ exports.handleInvite = async (code, email, to_port) => {
       }),
     }).where({port: from_port});
 
-  console.log(updateRes, {
-    create: create,
-    flow: accountData.flow + 0,
-    limit: limit,
-  });
-
   await emailService.sendAccountExpiredMail(a, '用户 '+email+' 通过您的邀请码注册，因此您获得7天的免费会员！感谢您为绿灯做出的贡献！'
       + "\n\n https://www.greentern.net");
 

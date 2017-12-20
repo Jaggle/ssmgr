@@ -88,6 +88,26 @@ const createOrder = async (user, account, amount, orderType = 3) => {
  */
 const createTmpOrder = async (userId, accountId, amount) => {
   let orderId = moment().format('YYYY-MM-DD-HH-mm-ss-') + Math.random().toString().substr(2, 6);
+
+  if (!userId || !accountId) {
+    return 'weri3ojosjdf3490jadf0sa0';
+  }
+
+  const oldOrder = await knex('alipay').select().where({
+    user: userId,
+    account: accountId,
+    status: 'CREATE',
+    amount: amount
+  }).then(success => {
+    if (success.length) {
+      return success[0];
+    }
+  });
+
+  if (oldOrder) {
+    return oldOrder.orderId;
+  }
+
   await knex('alipay').insert({
       orderId: orderId,
       orderType: 0,

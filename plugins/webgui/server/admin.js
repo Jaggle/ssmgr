@@ -13,10 +13,10 @@ const isAlipayUse = config.plugins.alipay && config.plugins.alipay.use;
 const isPaypalUse = config.plugins.paypal && config.plugins.paypal.use;
 const rp = require('request-promise');
 
-exports.payTmp = (req, res) => {
+exports.payTmp = async (req, res) => {
   const orderId = req.body.orderId;
 
-  alipay.payTmpOrder(orderId);
+  await alipay.payTmpOrder(orderId);
   res.send('success');
 };
 
