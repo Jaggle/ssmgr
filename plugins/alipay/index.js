@@ -151,7 +151,7 @@ const payTmpOrder = async (orderId) => {
     limit = 365;
   }
 
-  addFlow = 1024000000 * 20; // 每天20G
+  addFlow = 1000000000 * 20; // 每天20G
 
   let _limit = limit;
 
