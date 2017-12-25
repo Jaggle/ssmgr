@@ -46,7 +46,7 @@ exports.handleInvite = async (code, email, to_port) => {
     from_port: from_port,
     to_port: to_port,
     time: parseInt(Date.now()),
-    add_days: 7
+    add_days: 3
   });
 
   const a = await knex('account_plugin').select().where({port: from_port}).then(success => {
@@ -58,10 +58,10 @@ exports.handleInvite = async (code, email, to_port) => {
   let accountData = JSON.parse(a.data), create, limit;
   if (parseInt(accountData.create) + parseInt(accountData.limit*24*60*60*1000) < parseInt(Date.now())) {
     create = parseInt(Date.now());
-    limit= 7;
+    limit= 3;
   } else {
     create = accountData.create;
-    limit = accountData.limit + 7;
+    limit = accountData.limit + 3;
   }
 
   const updateRes = await knex('account_plugin').update({
@@ -72,7 +72,7 @@ exports.handleInvite = async (code, email, to_port) => {
       }),
     }).where({port: from_port});
 
-  await emailService.sendAccountExpiredMail(a, '用户 '+email+' 通过您的邀请码注册，因此您获得7天的免费会员！感谢您为绿灯做出的贡献！'
+  await emailService.sendAccountExpiredMail(a, '用户 '+email+' 通过您的邀请码注册，因此您获得3天的免费会员！感谢您为绿灯做出的贡献！'
       + "\n\n https://www.greentern.net");
 
   return true;

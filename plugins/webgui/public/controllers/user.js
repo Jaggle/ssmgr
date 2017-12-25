@@ -121,7 +121,7 @@ app
 
     if  (!window.hasShowDialog) {
       window.hasShowDialog = 1;
-      markdownDialog.show("邀请功能已经开通", "邀请功能已经开通, 请在左侧菜单点击「推广」，如果没有该菜单，请刷新一下本地缓存，<br />目前邀请一个用户注册，可以获得7天免费会员，<br/ ><span style='color: red'>同时，该用户续费，可以得到该次续费的天数的1/6</span> <br />立即<a href='/user/invite' id='aGoInvite'>点击体验</a>！");
+      markdownDialog.show("邀请功能已经开通", "邀请功能已经开通, 请在左侧菜单点击「推广」，如果没有该菜单，请刷新一下本地缓存，<br />目前邀请一个用户注册，可以获得3天免费会员，<br/ ><span style='color: red'>同时，该用户续费，可以得到该次续费的天数的1/6</span> <br />立即<a href='/user/invite' id='aGoInvite'>点击体验</a>！");
     }
 
     $scope.fontColor = (time) => {
