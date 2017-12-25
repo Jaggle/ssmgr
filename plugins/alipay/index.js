@@ -105,6 +105,8 @@ const createTmpOrder = async (userId, accountId, amount) => {
   });
 
   if (oldOrder) {
+    // 修改该订单的创建时间，否则很尴尬
+    await knex('alipay').update({createTime: Date.now()}).where({id:oldOrder.id});
     return oldOrder.orderId;
   }
 
