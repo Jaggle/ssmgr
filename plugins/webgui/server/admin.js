@@ -439,14 +439,10 @@ exports.getAccountIpFromAllServer = (req, res) => {
       });
     };
     const promiseArray = servers.map(server => {
-      let oneIp;
-      oneIp = getIp(accountInfo.port, server).catch(err => []);
-      console.log('query ip: ', oneIp);
-      return oneIp;
+      return getIp(accountInfo.port, server).catch(err => []);
     });
     return Promise.all(promiseArray);
   }).then(ips => {
-    console.log('all ip: ', ips);
     const result = [];
     ips.forEach(ip => {
       ip.forEach(i => {
