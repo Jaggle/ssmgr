@@ -108,9 +108,7 @@ const deleteCheckAccountTimeServer = serverId => {
 
 let lastCheck = 0;
 const checkServer = async (force) => {
-  if(!lastCheck) {
-    lastCheck = Date.now();
-  } else if(Date.now() - lastCheck <= 29 * 1000 && !force) {
+  if(lastCheck && (Date.now() - lastCheck <= 29 * 1000) && !force) {
     return;
   }
   lastCheck = Date.now();
@@ -132,11 +130,6 @@ const checkServer = async (force) => {
         if (a.hasSendExpireMail*1 === 0) {
           emailPlugin.sendAccountExpiredMail(a);
         }
-
-        //用户来之不易，不删除给他发送邮件通知
-        // if(a.autoRemove) {
-        //   knex('account_plugin').delete().where({ id: a.id }).then();
-        // }
       }
     }
   });
@@ -232,6 +225,8 @@ const checkServer = async (force) => {
             } else if(data.create + data.limit * timePeriod <= Date.now() || data.create >= Date.now()) {
               port.exist(a.port) && delPort(a, s);
               return 0;
+            } else if (data.flow == 200000000 && data.create + timePeriod <= Date.now()) {
+              port.exist(a.port) && delPort(a, s);
             } else if(!port.exist(a.port) && flow >= 0) {
               addPort(a, s);
               return 0;
