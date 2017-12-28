@@ -225,7 +225,7 @@ const checkServer = async (force) => {
             } else if(data.create + data.limit * timePeriod <= Date.now() || data.create >= Date.now()) {
               port.exist(a.port) && delPort(a, s);
               return 0;
-            } else if (data.flow == 200000000 && data.create + timePeriod <= Date.now()) {
+            } else if (data.flow == 200000000 && (data.create + timePeriod <= Date.now())) {
               port.exist(a.port) && delPort(a, s);
             } else if(!port.exist(a.port) && flow >= 0) {
               addPort(a, s);
