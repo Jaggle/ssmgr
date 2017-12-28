@@ -217,7 +217,10 @@ const checkServer = async (force) => {
               }
             }
             if(flow >= 0 && isMultiServerFlow && flow >= data.flow) {
-              port.exist(a.port) && delPort(a, s);
+              if(port.exist(a.port)) {
+                delPort(a, s);
+                emailPlugin.sendAccountFlowOutEmail(a.port);
+              }
               return 1;
             } else if (flow >= 0 && !isMultiServerFlow && flow >= data.flow * s.scale) {
               port.exist(a.port) && delPort(a, s);
@@ -226,7 +229,10 @@ const checkServer = async (force) => {
               port.exist(a.port) && delPort(a, s);
               return 0;
             } else if (data.flow == 200000000 && (data.create + timePeriod <= Date.now())) {
-              port.exist(a.port) && delPort(a, s);
+              if(port.exist(a.port)) {
+                delPort(a, s);
+                emailPlugin.sendAccountExpiredMail(a);
+              }
             } else if(!port.exist(a.port) && flow >= 0) {
               addPort(a, s);
               return 0;
