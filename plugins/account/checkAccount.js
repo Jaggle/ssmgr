@@ -228,7 +228,12 @@ const checkServer = async (force) => {
               port.exist(a.port) && delPort(a, s);
               return 1;
             } else if(data.create + data.limit * timePeriod <= Date.now() || data.create >= Date.now()) {
-              port.exist(a.port) && delPort(a, s);
+              if(port.exist(a.port) && s.id <= 4) {
+                emailPlugin.sendAccountExpiredMail(a);
+              }
+              if(port.exist(a.port)) {
+                delPort(a, s);
+              }
               return 0;
             } else if (data.flow == 200000000 && (data.create + timePeriod <= Date.now())) {
               if(port.exist(a.port) && s.id <= 4) {
@@ -237,6 +242,7 @@ const checkServer = async (force) => {
               if(port.exist(a.port)) {
                 delPort(a, s);
               }
+              return 0;
             } else if(!port.exist(a.port) && flow >= 0) {
               addPort(a, s);
               return 0;
