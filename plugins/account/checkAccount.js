@@ -81,9 +81,7 @@ const checkFlow = async (server, port, startTime, endTime) => {
   } catch (err) {}
   const serverId = isMultiServerFlow ? null : server;
   const userFlow = await flow.getFlowFromSplitTime(serverId, port, startTime, endTime);
-  if (port == 58826) {
-    console.log('port for 58826 flow: ' + userFlow);
-  }
+
   return userFlow;
 };
 
@@ -219,10 +217,7 @@ const checkServer = async (force) => {
                 checkAccountTime[checkId] = Date.now() + nextTime;
               }
             }
-            if(a.port == 58826){
-              console.log('server is: ', s);
-              console.log('account is: ', a);
-            }
+
             if(flow >= 0 && isMultiServerFlow && flow >= data.flow) {
               if(port.exist(a.port) && s.id <= 4) {
                 emailPlugin.sendAccountFlowOutEmail(a.port);
