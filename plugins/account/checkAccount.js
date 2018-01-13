@@ -21,6 +21,7 @@ const sendMessage = () => {
 };
 
 cron.second(() => {
+  console.log('log test 1');
   sendMessage();
 }, 10);
 
