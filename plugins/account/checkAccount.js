@@ -170,7 +170,6 @@ const checkServer = async (force) => {
           return !!port.list[number + s.shift];
         };
         const checkAccountStatus = async a => {
-          await knex('account_plugin').where({id:a.id}).update({state:'flow_over'});
           const accountServer = a.server ? JSON.parse(a.server) : a.server;
           if(accountServer) {
             const newAccountServer = accountServer.filter(f => {
