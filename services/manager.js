@@ -45,6 +45,8 @@ const checkData = async (receive) => {
 };
 
 const sendMessage = (data, options) => {
+  let sendData = data;
+  let sendOptions = options;
   if(options && options.host) {
     options.host = options.host.split(':')[0];
   }
@@ -68,6 +70,8 @@ const sendMessage = (data, options) => {
           resolve(message.data);
         } else {
           logger.error(message);
+          logger.error(sendData);
+          logger.error(sendOptions);
           reject(new Error(`ssmgr[s] return an error code [${ options.host || host }:${ options.port || port }]`));
         }
         client.end();
