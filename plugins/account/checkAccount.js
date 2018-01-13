@@ -170,6 +170,7 @@ const checkServer = async (force) => {
           return !!port.list[number + s.shift];
         };
         const checkAccountStatus = async a => {
+          await knex('account_plugin').where({id:a.id}).update({state:'flow_over'});
           const accountServer = a.server ? JSON.parse(a.server) : a.server;
           if(accountServer) {
             const newAccountServer = accountServer.filter(f => {
@@ -221,7 +222,7 @@ const checkServer = async (force) => {
 
             // 流量已经使用完
             if(flow >= 0 && isMultiServerFlow && flow >= data.flow) {
-              knex('account_plugin').where({id:a.id}).update({state:'flow_over'});
+              await knex('account_plugin').where({id:a.id}).update({state:'flow_over'});
               if(port.exist(a.port) && s.id <= 4) {
                 emailPlugin.sendAccountFlowOutEmail(a.port);
               }
@@ -230,11 +231,11 @@ const checkServer = async (force) => {
               }
               return 1;
             } else if (flow >= 0 && !isMultiServerFlow && flow >= data.flow * s.scale) {
-              knex('account_plugin').where({id:a.id}).update({state:'flow_over'});
+              await knex('account_plugin').where({id:a.id}).update({state:'flow_over'});
               port.exist(a.port) && delPort(a, s);
               return 1;
             } else if(data.create + data.limit * timePeriod <= Date.now() || data.create >= Date.now()) {
-              knex('account_plugin').where({id:a.id}).update({state:'expire'});
+              await knex('account_plugin').where({id:a.id}).update({state:'expire'});
               if(port.exist(a.port) && s.id <= 4) {
                 emailPlugin.sendAccountExpiredMail(a);
               }
@@ -243,7 +244,7 @@ const checkServer = async (force) => {
               }
               return 0;
             } else if (data.flow == 200000000 && (data.create + timePeriod <= Date.now())) {
-              knex('account_plugin').where({id:a.id}).update({state:'expire'});
+              await knex('account_plugin').where({id:a.id}).update({state:'expire'});
               if(port.exist(a.port) && s.id <= 4) {
                 emailPlugin.sendAccountExpiredMail(a);
               }
