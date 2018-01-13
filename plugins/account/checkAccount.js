@@ -14,6 +14,7 @@ const sendMessage = () => {
   if(!messages.length) {
     return;
   }
+  console.log(messages);
   messages.forEach(message => {
     manager.send(message[0], message[1]).then().catch();
   });
