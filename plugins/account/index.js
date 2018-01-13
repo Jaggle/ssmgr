@@ -100,6 +100,7 @@ const getAccount = async (options = {}) => {
     'account_plugin.password',
     'account_plugin.data',
     'account_plugin.status',
+    'account_plugin.state',
     'account_plugin.autoRemove',
     'user.id as userId',
     'user.email as user',
