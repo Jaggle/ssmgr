@@ -150,7 +150,7 @@ const sendSuccessMail = async userId => {
   await emailPlugin.sendMail(user.email, orderMail.title, orderMail.content);
 };
 
-cron.minute(async () => {
+/*cron.minute(async () => {
   if(!config.plugins.paypal || !config.plugins.paypal.use) { return; }
   const orders = await knex('paypal').select().whereNotBetween('expireTime', [0, Date.now()]);
   const scanOrder = order => {
@@ -181,7 +181,7 @@ cron.minute(async () => {
   for(const order of orders) {
     await scanOrder(order);
   }
-}, 1);
+}, 1);*/
 
 const orderList = async (options = {}) => {
   const where = {};
@@ -260,7 +260,7 @@ const orderListAndPaging = async (options = {}) => {
 exports.orderListAndPaging = orderListAndPaging;
 exports.orderList = orderList;
 
-cron.minute(() => {
-  if(!config.plugins.paypal || !config.plugins.paypal.use) { return; }
-  knex('paypal').delete().where({ status: 'created' }).whereBetween('expireTime', [0, Date.now() - 1 * 24 * 3600 * 1000]).then();
-}, 30);
+// cron.minute(() => {
+//   if(!config.plugins.paypal || !config.plugins.paypal.use) { return; }
+//   knex('paypal').delete().where({ status: 'created' }).whereBetween('expireTime', [0, Date.now() - 1 * 24 * 3600 * 1000]).then();
+// }, 30);

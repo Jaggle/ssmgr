@@ -225,7 +225,7 @@ const sendSuccessMail = async userId => {
   await emailPlugin.sendMail(user.email, orderMail.title, orderMail.content);
 };
 
-cron.minute(async () => {
+/*cron.minute(async () => {
   if(!alipay_f2f) { return; }
   const orders = await knex('alipay').select().whereNotBetween('expireTime', [0, Date.now()]);
   const scanOrder = order => {
@@ -264,7 +264,7 @@ cron.minute(async () => {
   for(const order of orders) {
     await scanOrder(order);
   }
-}, 1);
+}, 1);*/
 
 const checkOrder = async (orderId) => {
   const order = await knex('alipay').select().where({
@@ -367,10 +367,10 @@ const orderListAndPaging = async (options = {}) => {
   };
 };
 
-cron.minute(() => {
+/*cron.minute(() => {
   if(!alipay_f2f) { return; }
   knex('alipay').delete().where({ status: 'CREATE' }).whereBetween('createTime', [0, Date.now() - 1 * 24 * 3600 * 1000]).then();
-}, 37);
+}, 37);*/
 
 exports.orderListAndPaging = orderListAndPaging;
 exports.orderList = orderList;
