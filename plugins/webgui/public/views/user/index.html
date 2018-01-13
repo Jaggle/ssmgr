@@ -21,7 +21,11 @@
     </md-card-title>
     <md-card-content>
         <md-list role="list">
-            <md-list-item role="listitem" class="md-no-proxy _md"> 帐号名：{{ user.user }} ({{ user.port }})</md-list-item>
+            <md-list-item role="listitem" class="md-no-proxy _md"> 帐号名：{{ user.user }} ({{ user.port }}) -
+                <span ng-show="user.state === 'running'" style="color: #33aa33">运行中</span>
+                <span ng-show="user.state === 'flow_out'" style="color: red">流量用完</span>
+                <span ng-show="user.state === 'expire'" style="color: red">过期</span>
+            </md-list-item>
             <md-divider></md-divider>
             <md-list-item role="listitem" class="md-no-proxy _md">到期时间：
                 <span ng-if="user.type === 1" translate>不限时</span>
