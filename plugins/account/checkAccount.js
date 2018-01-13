@@ -109,7 +109,7 @@ const deleteCheckAccountTimeServer = serverId => {
 
 let lastCheck = 0;
 const checkServer = async (force) => {
-  console.log('new turn to check server');
+  console.log('new turn to check server ' + (new Date));
   if(lastCheck && (Date.now() - lastCheck <= 29 * 1000) && !force) {
     return;
   }
