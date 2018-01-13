@@ -116,6 +116,7 @@ const checkServer = async (force) => {
   lastCheck = Date.now();
   logger.info('check account');
   const account = await knex('account_plugin').select().where({state:'running'});
+  console.log('new turn to check server ' +(new Date)+ ', total : ' + account.length);
   account.forEach(a => {
     if(a.type >= 2 && a.type <= 5) {
       let timePeriod = 0;
