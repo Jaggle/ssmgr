@@ -183,6 +183,18 @@ exports.status = (req, res) => {
 
 exports.sendCode = (req, res) => {
   req.checkBody('email', 'Invalid email').isEmail();
+
+  let noAccessDomains = ['chenshichou.uu.me', 'yesp.com'];
+  let noAccess = false;
+  noAccessDomains.forEach(function (item, Index) {
+    if (req.body.email.toString().toLowerCase().indexOf(item) > 0 && noAccess == false) {
+      noAccess = true;
+    }
+  });
+  if (noAccess) {
+    logger.error('no access');
+    return res.status(403).end('no access');
+  }
   req.getValidationResult().then(result => {
     if(result.isEmpty) { return; }
     return Promise.reject('invalid email');
