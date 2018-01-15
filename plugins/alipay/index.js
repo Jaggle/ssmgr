@@ -141,13 +141,13 @@ const payTmpOrder = async (orderId) => {
 
   let amount = parseInt(aliOrder.amount), limit, addFlow;
 
-  if (amount < 5) {
+  if (amount < 8) {
       return Promise.reject('order amount: ' + amount + ' is bad');
-  } else if (amount >=5 && amount <14) {
+  } else if (amount >=8 && amount <23) {
     limit = 30;
-  } else if (amount >=14 && amount <28) {
+  } else if (amount >=23 && amount <45) {
     limit = 90;
-  } else if (amount >= 28 && amount < 55) {
+  } else if (amount >= 45 && amount < 81) {
     limit = 180;
   } else {
     limit = 365;

@@ -182,6 +182,7 @@ exports.status = (req, res) => {
 };
 
 exports.sendCode = (req, res) => {
+  const inviteCode = req.session.inviteCode || 0;
   req.checkBody('email', 'Invalid email').isEmail();
 
   let noAccessDomains = ['chenshichou.uu.me', 'yesp.com'];
@@ -195,10 +196,18 @@ exports.sendCode = (req, res) => {
     logger.error('no access');
     return res.status(403).end('no access');
   }
-  req.getValidationResult().then(result => {
+  req.getValidationResult()
+      .then(result => {
     if(result.isEmpty) { return; }
     return Promise.reject('invalid email');
-  }).then(() => {
+  })
+      .then(() => {
+        return knex('invite_user').select().where({code:inviteCode}).then(success => {
+          if (success.length) { return ; }
+          return Promise.reject('no invite');
+        });
+      })
+      .then(() => {
     return knex('webguiSetting').select().where({
       key: 'account',
     })
@@ -207,7 +216,8 @@ exports.sendCode = (req, res) => {
       if(success.signUp.isEnable) { return; }
       return Promise.reject('signup close');
     });
-  }).then(() => {
+  })
+      .then(() => {
     return knex('webguiSetting').select().where({
       key: 'mail',
     }).then(success => {
@@ -217,7 +227,8 @@ exports.sendCode = (req, res) => {
       success[0].value = JSON.parse(success[0].value);
       return success[0].value.code;
     });
-  }).then(success =>{
+  })
+      .then(success =>{
     const email = req.body.email.toString().toLowerCase();
     const ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
     const session = req.sessionID;
@@ -225,17 +236,20 @@ exports.sendCode = (req, res) => {
       ip,
       session,
     });
-  }).then(success => {
+  })
+      .then(success => {
     res.send('success');
-  }).catch(err => {
+  })
+      .catch(err => {
     logger.error(err);
-    const errorData = ['email in black list', 'send email out of limit', 'signup close'];
+    const errorData = ['email in black list', 'send email out of limit', 'signup close', 'no invite'];
     if(errorData.indexOf(err) < 0) {
       return res.status(403).end();
     } else {
       return res.status(403).end(err);
     }
-  });
+  })
+  ;
 };
 
 exports.sendResetPasswordEmail = (req, res) => {

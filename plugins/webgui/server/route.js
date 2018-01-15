@@ -227,9 +227,7 @@ const homePage = (req, res) => {
 };
 
 const buyProduct = (req, res) => {
-
     const userId = req.session.user;
-
     account.getAccount({
         userId,
     }).then(success => {

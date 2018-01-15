@@ -70,7 +70,11 @@ const sendMessage = (data, options) => {
           resolve(message.data);
         } else {
           logger.error(message);
-          logger.error(sendData);
+          if (sendData.length > 100) {
+            logger.error(sendData);
+          } else {
+            logger.error('data too long, ignore it.')
+          }
           logger.error(sendOptions);
           reject(new Error(`ssmgr[s] return an error code [${ options.host || host }:${ options.port || port }]`));
         }
