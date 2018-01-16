@@ -44,7 +44,7 @@ app.factory('homeApi', ['$http', $http => {
         if(err.data === 'send email out of limit') { errData = '请求过于频繁，请稍后再试'; }
         if(err.data === 'signup close') { errData = '当前时段尚未开放注册'; }
         if(err.data === 'no access') { errData = '您暂时不能注册本网站，请联系 singviy@gmail.com'; }
-        if(err.data === 'no invite') { errData = '请您远离这是非之地，就像，您从未来到这个地方'; }
+        if(err.data === 'no invite') { errData = '请您远离这是非之地，就像，您从未来到这个地方;Please leave this place, coz it not belongs to u'; }
         return Promise.reject(errData);
       } else {
         return Promise.reject('网络异常，请稍后再试');
