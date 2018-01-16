@@ -2,7 +2,7 @@
     <div flex="15"></div>
     <div flex layout="row">
         <div flex="2" flex-gt-sm="30"></div>
-        <div flex layout="column" layout-align="space-around stretch">
+        <div flex layout="column" layout-align="space-around stretch" style="padding: 5px">
             <style>
                 ul li.leng-detail {
                     text-align: center;
@@ -33,7 +33,7 @@
                 </li>
             </ul>
 
-            <button class="md-raised md-primary md-button md-ink-ripple buy" onclick="jump()">点击支付</button>
+            <button class="md-raised md-primary md-button md-ink-ripple buy" ng-click="buyAlert()">点击支付</button>
 
             <div style="font-size: 12px;color: coral;display: none">
                 <ul>
