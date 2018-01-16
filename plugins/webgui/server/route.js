@@ -253,6 +253,9 @@ app.get(/^\/home\//, homePage);
 app.get(/^\/admin\//, homePage);
 app.get(/^\/user\//, homePage);
 app.get(/^\/buy-product/, buyProduct);
+app.get(/^\/ping/,  (req, res) => {
+  res.send('pong');
+});
 
 app.get('/serviceworker.js', (req, res) => {
   return knex('webguiSetting').select().where({

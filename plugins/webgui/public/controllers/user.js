@@ -97,8 +97,8 @@ app
     };
   }
 ])
-.controller('UserIndexController', ['$scope', '$state', 'userApi', 'markdownDialog', '$localStorage',
-  ($scope, $state, userApi, markdownDialog, $localStorage) => {
+.controller('UserIndexController', ['$scope', '$state', '$http','userApi', 'markdownDialog', 'confirmDialog',
+  ($scope, $state, $http, userApi, markdownDialog, confirmDialog) => {
     $scope.setTitle('首页');
     // $scope.notices = [];
     userApi.getNotice().then(success => {
@@ -121,7 +121,17 @@ app
 
     if  (!window.hasShowDialog) {
       window.hasShowDialog = 1;
-      markdownDialog.show("邀请功能已经开通", "邀请功能已经开通, 请在左侧菜单点击「推广」，如果没有该菜单，请刷新一下本地缓存，<br />目前邀请一个用户注册，可以获得3天免费会员，<br/ ><span style='color: red'>同时，该用户续费，可以得到该次续费的天数的1/6</span> <br />立即<a href='/user/invite' id='aGoInvite'>点击体验</a>！");
+      //markdownDialog.show("关闭开放注册提示", "目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接<br /><a href='/user/invite' id='aGoInvite'>点击查看</a>你的邀请链接！");
+      //confirmDialog.show('目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接', '立即查看');
+      confirmDialog.show({
+        text: '目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接',
+        cancel: '取消',
+        confirm: '查看我的邀请链接',
+        error: '操作失败',
+        fn: function () { return $http.get('/ping'); },
+      }).then(() => {
+        $state.go('user.invite');
+      });
     }
 
     $scope.fontColor = (time) => {
