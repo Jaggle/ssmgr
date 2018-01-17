@@ -396,7 +396,7 @@ exports.createOrder = (req, res) => {
   req.checkBody('price', 'Invalid price').notEmpty();
   req.getValidationResult().then(result => {
     if (result.isEmpty()) {
-      return knex('account_plugin').select().where({id: userId});
+      return knex('account_plugin').select().where({userId});
     }
     result.throw();
   }).then(success => {
