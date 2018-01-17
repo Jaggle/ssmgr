@@ -197,7 +197,11 @@ app.controller('AdminController', ['$scope', '$mdMedia', '$mdSidenav', '$state',
       }
     }, 15 * 1000));
     $scope.showOrderInfo = order => {
-      orderDialog.show(order);
+      orderDialog.show(order).then(() => {
+        updateIndexInfo();
+      }).catch((err) => {
+        updateIndexInfo();
+      });
     };
   }
 ])
