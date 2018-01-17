@@ -390,6 +390,40 @@ exports.sendUserEmail = (req, res) => {
   });
 };
 
+exports.createOrder = (req, res) => {
+  const userId = +req.params.userId;
+  const price = req.body.price;
+  req.checkBody('price', 'Invalid price').notEmpty();
+  req.getValidationResult().then(result => {
+    if (result.isEmpty()) {
+      return knex('account_plugin').select().where({id: userId});
+    }
+    result.throw();
+  }).then(success => {
+    if (success.length) {
+      const account = success[0].port;
+      const time = 60;
+      const orderId = moment().format('YYYYMMDDHHmmss') + Math.random().toString().substr(2, 6);
+      return knex('alipay').insert({
+        orderId: orderId,
+        orderType: 0,
+        qrcode: '',
+        amount: price + '',
+        user: userId,
+        account: account ? account : null,
+        status: 'CREATE',
+        createTime: Date.now(),
+        expireTime: Date.now() + time * 60 * 1000,
+      });
+    }
+  }).then(success => {
+    return res.send('success');
+  }).catch(err => {
+    console.log(err);
+    res.status(403).end();
+  });
+};
+
 exports.getAccountIp = (req, res) => {
   const accountId = +req.params.accountId;
   const serverId = +req.params.serverId;
