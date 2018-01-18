@@ -51,7 +51,7 @@
                 </md-list-item>
                 <md-divider></md-divider>
             </md-list>
-            <div  flex layout="row" layout-align="space-around center">
+            <div  flex layout="row" layout-align="space-around center" ng-show="publicInfo.order.status === 'CREATE'">
                 <button ng-click="publicInfo.prompt(publicInfo.order.orderId)" class="md-raised md-primary md-button md-ink-ripple">确认已支付</button>
             </div>
         </div>
