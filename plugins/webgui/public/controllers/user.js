@@ -333,7 +333,7 @@ app
   }
 ])
 .controller('UserFaqController', ['$scope', ($scope) => { $scope.setTitle('使用教程'); }])
-.controller('UserBuyController', ['$scope', 'confirmDialog', '$http', 'alertDialog', ($scope, confirmDialog, $http, alertDialog) => {
+.controller('UserBuyController', ['$scope', 'confirmDialog', '$http', 'alertDialog', 'buyDialog', ($scope, confirmDialog, $http, alertDialog, buyDialog) => {
   $scope.setTitle('购买');
   $scope.buyAlert = () => {
     if (!window.price) {
@@ -341,13 +341,16 @@ app
       return false;
     }
     confirmDialog.show({
-      text: "支付时请在支付说明/备注里写明自己的注册邮箱\n付款后大概3分钟左右生效\n如果提示付款8.01，请直接付款8元即可\n付款后可关闭付款页面",
+      text: "支付时请在支付说明/备注里写明自己的注册邮箱\n如果提示付款8.01，请直接付款8元即可",
       cancel: '再考虑一下',
       confirm: '前往支付',
       error: '操作失败',
-      fn: function () { return $http.get('/ping'); },
+      fn: function () { return $http.post('/api/user/order/create', {
+        price: window.price
+      }); },
     }).then(() => {
-      window.open("/buy-product?price="+window.price);
+      buyDialog.show(window.price);
+      //window.open("/buy-product?price="+window.price);
     });
   };
 }])

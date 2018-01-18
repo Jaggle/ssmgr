@@ -200,6 +200,22 @@ exports.changeShadowsocksPassword = (req, res) => {
   });
 };
 
+exports.createTmpOrder = (req, res) => {
+  const userId = req.session.user;
+  account.getAccount({
+    userId,
+  }).then(success => {
+    const accountId = success[0].port;
+    const price = req.body.price;
+    alipay.createTmpOrder(userId, accountId, price).then(success => {
+      return res.send('success');
+    });
+  }).catch(err => {
+    console.log(err);
+    res.status(500).end();
+  });
+};
+
 exports.createOrder = (req, res) => {
   const userId = req.session.user;
   const accountId = req.body.accountId;

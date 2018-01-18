@@ -132,6 +132,7 @@ app.get('/api/user/multiServerFlow', isUser, user.getMultiServerFlowStatus);
 app.get('/api/user/status/alipay', isUser, user.getAlipayStatus);
 
 app.get('/api/user/order/price', isUser, user.getPrice);
+app.post('/api/user/order/create', isUser, user.createTmpOrder);
 app.post('/api/user/order/pay-notice', user.payNotice);
 app.post('/api/user/order/qrcode', isUser, user.createOrder);
 app.post('/api/user/order/status', isUser, user.checkOrder);
