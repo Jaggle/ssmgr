@@ -137,5 +137,18 @@ module.exports = {
   '使用教程': 'Guidance',
   '价格': 'Price',
 
-  '您好' : 'Hello'
+  '您好' : 'Hello',
+
+  'Greentern - 绿灯科学上网': 'Greentern - Magic Internet Surfing',
+  '富强民主，文明和谐': 'Stable, Harmony',
+  '自由平等，公正法治': 'Free, Justice',
+  '爱国敬业，诚信友善': 'Keeping, Swiftly',
+
+  '8元 / 1月': '8rmb / month',
+  '23元 / 3月': '23rmb / season',
+  '45元 / 半年': '45rmb / 0.5year',
+  '81元 / 一年': '81rmb / 1year',
+
+  '新注册用户可免费试用一天，流量限制200M': 'New registered user has one day of trial, with traffic limit 200M',
+  '付费用户不限制流量，请登录后续费': 'Paid user has no flow limitation, please log in to charge'
 };
