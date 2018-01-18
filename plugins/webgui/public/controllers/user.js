@@ -341,7 +341,7 @@ app
       return false;
     }
     confirmDialog.show({
-      text: "支付时请在支付说明/备注里写明自己的注册邮箱\n如果提示付款8.01，请直接付款8元即可",
+      text: "支付时请务必在支付说明/备注里写明自己的注册邮箱",
       cancel: '再考虑一下',
       confirm: '前往支付',
       error: '操作失败',
