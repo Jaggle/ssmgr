@@ -122,8 +122,7 @@ app
     if  (!$localStorage.nextTip) {
       $localStorage.nextTip = 0;
     }
-    //markdownDialog.show("关闭开放注册提示", "目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接<br /><a href='/user/invite' id='aGoInvite'>点击查看</a>你的邀请链接！");
-    //confirmDialog.show('目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接', '立即查看');
+
     const tip1 = () => {
       confirmDialog.show({
         text: '目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接',

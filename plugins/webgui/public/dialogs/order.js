@@ -18,7 +18,7 @@ app.factory('orderDialog', [ '$mdDialog', '$state', '$http', ($mdDialog, $state,
   publicInfo.prompt = (orderId) => {
     let pwd = prompt('请输入操作密码');
 
-    if (pwd === 'yes') {
+    if (pwd === '123') {
         $http.post('/api/admin/pay', {
           orderId: orderId
         }).then(() => {
