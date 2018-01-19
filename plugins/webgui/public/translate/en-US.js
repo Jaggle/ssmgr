@@ -144,6 +144,8 @@ module.exports = {
   '自由平等，公正法治': 'Free, Justice',
   '爱国敬业，诚信友善': 'Keeping, Swiftly',
 
+  '价格说明': 'PRICE INTRODUCTION',
+
   '8元 / 1月': '8rmb / month',
   '23元 / 3月': '23rmb / season',
   '45元 / 半年': '45rmb / 0.5year',

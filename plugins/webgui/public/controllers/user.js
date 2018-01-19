@@ -97,8 +97,8 @@ app
     };
   }
 ])
-.controller('UserIndexController', ['$scope', '$state', '$http','userApi', 'markdownDialog', 'confirmDialog',
-  ($scope, $state, $http, userApi, markdownDialog, confirmDialog) => {
+.controller('UserIndexController', ['$scope', '$state', '$http','userApi', 'markdownDialog', 'confirmDialog', 'alertDialog', '$localStorage',
+  ($scope, $state, $http, userApi, markdownDialog, confirmDialog, alertDialog, $localStorage) => {
     $scope.setTitle('首页');
     // $scope.notices = [];
     userApi.getNotice().then(success => {
@@ -119,10 +119,12 @@ app
     };
     getUserAccountInfo();
 
-    if  (!window.hasShowDialog) {
-      window.hasShowDialog = 1;
-      //markdownDialog.show("关闭开放注册提示", "目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接<br /><a href='/user/invite' id='aGoInvite'>点击查看</a>你的邀请链接！");
-      //confirmDialog.show('目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接', '立即查看');
+    if  (!$localStorage.nextTip) {
+      $localStorage.nextTip = 0;
+    }
+    //markdownDialog.show("关闭开放注册提示", "目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接<br /><a href='/user/invite' id='aGoInvite'>点击查看</a>你的邀请链接！");
+    //confirmDialog.show('目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接', '立即查看');
+    const tip1 = () => {
       confirmDialog.show({
         text: '目前Greentern只能通过邀请的方式注册，如果你想分享给朋友，请务必给ta你的邀请链接',
         cancel: '取消',
@@ -132,6 +134,19 @@ app
       }).then(() => {
         $state.go('user.invite');
       });
+    };
+    const tip2 = () => {
+      alertDialog.show('每个节点的加密方式可能不一样，请仔细检查', '知道了');
+    };
+    const tip3 = () => {
+      alertDialog.show("如果帐号快要过期，请至少提前一天续费，\n否则续费后可能会导致帐号无法正常使用的情况", '知道了');
+    };
+
+    const tips = [tip1, tip2, tip3];
+    const showTip = tips[$localStorage.nextTip++];
+    showTip();
+    if ($localStorage.nextTip >= 3) {
+      $localStorage.nextTip = 0;
     }
 
     $scope.fontColor = (time) => {
