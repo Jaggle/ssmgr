@@ -138,6 +138,7 @@ module.exports = {
   '价格': 'Price',
 
   '您好' : 'Hello',
+  '推广': 'Affiliate',
 
   'Greentern - 绿灯科学上网': 'Greentern - Magic Internet Surfing',
   '富强民主，文明和谐': 'Stable, Harmony',
@@ -152,5 +153,19 @@ module.exports = {
   '81元 / 一年': '81rmb / 1year',
 
   '新注册用户可免费试用一天，流量限制200M': 'New registered user has one day of trial, with traffic limit 200M',
-  '付费用户不限制流量，请登录后续费': 'Paid user has no flow limitation, please log in to charge'
+  '付费用户不限制流量，请登录后续费': 'Paid user has no flow limitation, please log in to charge',
+
+  '立即续费': 'Buy now!',
+  '详细使用教程': 'More Guidance',
+  '加入我们！': 'Join Group',
+
+  '账户信息': 'Account Info',
+  '到期时间': 'Expire Time',
+  '运行中': 'running',
+  '流量用完': 'flow over',
+  '帐号到期': 'expired',
+
+  'QQ群': 'QQ Group',
+  '快速通道': 'Quick Access',
+  '知道了': 'Got it'
 };
