@@ -136,7 +136,11 @@ exports.login = (req, res) => {
     if(result.isEmpty()) {
       const email = req.body.email.toString().toLowerCase();
       const password = req.body.password;
-      return user.checkPassword(email, password);
+      const loginIp = req.headers['x-forwarded-for'] ||
+          req.connection.remoteAddress ||
+          req.socket.remoteAddress ||
+          req.connection.socket.remoteAddress;
+      return user.checkPassword(email, password, loginIp);
     }
     return Promise.reject('invalid body');
   }).then(success => {

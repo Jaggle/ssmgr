@@ -55,7 +55,7 @@ const addUser = async (options) => {
   }
 };
 
-const checkPassword = async (username, password) => {
+const checkPassword = async (username, password, loginIp) => {
   try {
     const user = await knex('user').select(['id', 'type', 'username', 'password']).where({
       username,
@@ -77,6 +77,7 @@ const checkPassword = async (username, password) => {
     if(createPassword(password, username) === user[0].password) {
       await knex('user').update({
         lastLogin: Date.now(),
+        lastLoginIp: loginIp
       }).where({
         username,
       });
