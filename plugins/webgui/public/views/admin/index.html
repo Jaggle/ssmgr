@@ -33,7 +33,7 @@
                   <md-list-item ng-repeat="user in loginUsers">
                       <div flex layout="row" layout-align="space-between center"  ng-click="toUser(user.id)">
                           <div flex="30" flex-xs="60">
-                              <span style="font-size: 0.9em;">{{user.username}}</span><br><span style="font-size: 0.9em;">{{user.lastLoginIp}}</span>
+                              <span style="font-size: 0.9em;">{{user.username}}</span><br><span style="font-size: 0.9em;color: #aaa">{{user.lastLoginIp}}</span>
                           </div>
                           <div flex="30" flex-xs="40" style="text-align: right; color: #aaa; font-size: 0.8em;" ng-if="user.lastLogin">{{user.lastLogin | timeagoshort}}</div>
                       </div>
