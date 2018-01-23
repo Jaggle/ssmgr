@@ -20,8 +20,14 @@ const config = appRequire('services/config').all();
 
 const isUser = (req, res, next) => {
   if(req.session.type === 'normal') {
+    const loginIp = req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress;
+
     knex('user').update({
       lastLogin: Date.now(),
+      lastLoginIp: loginIp
     }).where({ id: req.session.user }).then();
     return next();
   } else {
