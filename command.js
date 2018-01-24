@@ -27,38 +27,32 @@ require('./init/knex');
 
 const initDb = require('./init/loadModels').init;
 
-initDb().then(() => {
-  const knex = appRequire('init/knex').knex;
-  const email = appRequire('plugins/email/index');
+const knex = appRequire('init/knex').knex;
+const email = appRequire('plugins/email/index');
 
-  const sendMail = async () => {
-    const allEmail = await knex('user').select(['email']);
-    const notice = await knex('email_notice').select();
-    const title = notice[0].title;
-    const content = notice[0].content;
+const sendMail = async  () => {
+  const allEmail = await knex('user').select(['email']);
+  const notice = await knex('email_notice').select();
+  const title = notice[0].title;
+  const content = notice[0].content;
 
-    let index = 0;
-    let interval = setInterval(() => {
-      if (index < allEmail.length) {
-        let _email = allEmail[index++];
-        email.sendMail(_email.email, title, content, {
-          type: 'email-notice',
-        });
-        console.log('send email for: ' + _email.email);
-      } else {
-        clearInterval(interval);
-        console.log('finished!');
-      }
-    }, 3000);
-  };
+  let index = 0;
+  let interval = setInterval(() => {
+    if (index < allEmail.length) {
+      let _email = allEmail[index++];
+      email.sendMail(_email.email, title, content, {
+        type: 'email-notice',
+      });
+      console.log('send email for: ' + _email.email);
+    } else {
+      clearInterval(interval);
+      console.log('finished!');
+    }
+  }, 3000);
 
-  sendMail();
-}).then(() => {
-
-
-}).catch(err => {
-  logger.error(err);
-});
+};
+initDb();
+sendMail();
 
 
 // manager.send({command: 'version'}, {
