@@ -27,7 +27,8 @@ const onlineCacheUrl = [
   '/libs/angular-translate.min.js',
   '/libs/bundle.js',
 
-  'https://static.yeskn.com/greentern/favicon.png',
+  '/favicon.ico',
+  '/libs/banner.png',
 
   '/libs/style.css',
   '/libs/angular-material.min.css',
@@ -161,6 +162,6 @@ self.addEventListener('push', function (event) {
   event.waitUntil(
     self.registration.showNotification(title, {
       body: data.options.body,
-      icon: 'https://static.yeskn.com/greentern/favicon.png',
+      icon: '/favicon.ico',
     }));
 });

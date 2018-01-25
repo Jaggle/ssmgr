@@ -173,6 +173,33 @@ app.get('/manifest.json', (req, res) => {
   });
 });
 
+app.get('/favicon.png', (req, res) => {
+    let file = './libs/favicon.png';
+    let options = {
+        root: './plugins/webgui/'
+    };
+    const iconPath = config.plugins.webgui.icon;
+    if(iconPath) {
+        const ssmgrPath = path.resolve(os.homedir(), './.ssmgr/');
+        if (iconPath[0] === '/' || iconPath[0] === '.') {
+            options = {};
+            file = path.resolve(iconPath);
+        } else if (iconPath[0] === '~') {
+            file = '.' + iconPath.substr(1);
+            options.root = os.homedir();
+        } else {
+            file = iconPath;
+            options.root = ssmgrPath;
+        }
+    }
+    res.sendFile(file, options);
+});
+
+app.get('/favicon.ico', (req, res) => {
+   let file = './views/favicon.ico';
+   res.sendFile(file, {root: './plugins/webgui/'});
+});
+
 const version = appRequire('package').version;
 const configForFrontend = {
   site: config.plugins.webgui.site,

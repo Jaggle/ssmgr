@@ -2,27 +2,27 @@ let gcmSenderId = appRequire('services/config').get('plugins.webgui.gcmSenderId'
 if(gcmSenderId) { gcmSenderId = gcmSenderId.toString(); }
 
 const manifest = {
-  short_name: 'ssmgr',
-  name: 'Shadowsocks-Manager',
+  short_name: 'Greentern',
+  name: 'Greentern',
   icons: [
     {
-      src: 'https://static.yeskn.com/greentern/favicon.png',
-      type: 'image/png',
+      src: '/favicon.ico',
+      type: 'image/x-icon',
       sizes: '48x48'
     },
     {
-      src: 'https://static.yeskn.com/greentern/favicon.png',
-      type: 'image/png',
+      src: '/favicon.ico',
+      type: 'image/x-icon',
       sizes: '128x128'
     },
     {
-      src: 'https://static.yeskn.com/greentern/favicon.png',
-      type: 'image/png',
+      src: '/favicon.ico',
+      type: 'image/x-icon',
       sizes: '144x144'
     },
     {
-      src: 'https://static.yeskn.com/greentern/favicon.png',
-      type: 'image/png',
+      src: '/favicon.ico',
+      type: 'image/x-icon',
       sizes: '256x256'
     }
   ],
