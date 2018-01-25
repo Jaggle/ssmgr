@@ -19,17 +19,8 @@
             </style>
             <h2>选择套餐</h2>
             <ul>
-                <li class="leng-detail st_hk" onclick="selectPrice(8)" data-price="8">
-                    1个月/8元
-                </li>
-                <li class="leng-detail st_hk" onclick="selectPrice(23)" data-price="23">
-                    3个月/23元
-                </li>
-                <li class="leng-detail st_hk" onclick="selectPrice(45)" data-price="45">
-                    半年/45元
-                </li>
-                <li class="leng-detail st_hk" onclick="selectPrice(81)" data-price="81">
-                    一年/81元
+                <li ng-repeat="product in products" class="leng-detail" ng-click="checkProduct(product.price)" ng-style="checkCurrent(product.price)">
+                    {{product.title}}
                 </li>
             </ul>
 
