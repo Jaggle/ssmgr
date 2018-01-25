@@ -44,3 +44,4 @@ config/development.yml
 lib
 
 .idea
+plugins/webgui/libs/downloads
