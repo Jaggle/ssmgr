@@ -139,6 +139,9 @@ const sendAccountExpiredMail = async (account, msg) => {
   const user = await userModel.getOne(userId).then(success => {
     return success;
   });
+  if (!user) {
+    return null;
+  }
 
   try {
     await sendMail(user.email, '绿灯提醒服务', msg || '您的帐号已经到期，未避免您的网络中断，请及时续费，祝科学上网愉快！', {
@@ -157,6 +160,9 @@ const sendAccountExpiredMail = async (account, msg) => {
 const sendAccountFlowOutEmail = async (port) => {
   const _account = await knex('account_plugin').where({port}).then(success => success[0]);
   const _user = await knex('user').where({id:_account.userId}).then(success => success[0]);
+  if (!_user) {
+    return null;
+  }
   await sendMail(_user.email, '绿灯提醒服务', '您的当前流量已用完，未避免您的网络中断，请及时续费，祝科学上网愉快！', {
     type: 'flow-out'
   });
