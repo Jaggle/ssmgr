@@ -361,18 +361,13 @@ app
       return {
           border: '2px solid green'
       }
-    } else {
-        return {
-            border: '2px solid #fff'
-        }
     }
   };
   $scope.checkProduct = (price) => {
     $scope.currentPrice = price;
-    window.price = price;
   };
   $scope.buyAlert = () => {
-    if (!window.price) {
+    if (!$scope.currentPrice) {
       alertDialog.show('请先选择价格', '知道了');
       return false;
     }
@@ -382,11 +377,10 @@ app
       confirm: '前往支付',
       error: '操作失败',
       fn: function () { return $http.post('/api/user/order/create', {
-        price: window.price
+        price: $scope.currentPrice
       }); },
     }).then(() => {
-      buyDialog.show(window.price);
-      //window.open("/buy-product?price="+window.price);
+      buyDialog.show($scope.currentPrice);
     });
   };
 }])
