@@ -1,7 +1,7 @@
 const app = angular.module('app');
 const window = require('window');
 
-const config = JSON.parse(window.ssmgrConfig);
+const config = JSON.parse(window.grtConfig);
 app.config(['$mdThemingProvider', $mdThemingProvider => {
   const checkColor = color => {
     const colors = [

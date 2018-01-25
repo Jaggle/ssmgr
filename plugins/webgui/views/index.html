@@ -18,15 +18,15 @@
     <link rel="manifest" href="/manifest.json">
     <title><%= title%></title>
     <base href="/">
-    <script src="<%= cdn%>/libs/angular.min.js?v=df9dkd5"></script>
-    <script src="<%= cdn%>/libs/angular-inview.js?v=dkdl4o0"></script>
-    <script src="<%= cdn%>/libs/angular-animate.min.js?v=d5jk0dk"></script>
 </head>
 
 <body ng-app="app" ng-cloak>
-    <script src="<%= cdn%>/libs/angular-aria.min.js"></script>
-    <script src="<%= cdn%>/libs/angular-messages.min.js"></script>
-    <script src="<%= cdn%>/libs/angular-material.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular-inview/2.1.0/angular-inview.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular-animate.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular-aria.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular-messages.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular-material/1.1.0/angular-material.min.js"></script>
     <script src="<%= cdn%>/libs/angular-ui-router.min.js"></script>
     <script src="<%= cdn%>/libs/angular-translate.min.js"></script>
     <script src="<%= cdn%>/libs/qrcode.min.js"></script>
@@ -39,8 +39,7 @@
     <script src="<%= cdn%>/libs/angular-websocket.min.js"></script>
     <script src="<%= cdn%>/libs/marked.min.js"></script>
     <script src="<%= cdn%>/libs/angular-marked.min.js"></script>
-    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
-    <script src="/libs/bundle.js?v=jfdk0cwjhdos0dsakd9dk9do0"></script>
+
     <div ng-controller="MainController" layout-fill>
         <div layout-fill layout="row" layout-align="center center" ng-show="mainLoading">
             <div layout="column" layout-align="center center">
@@ -51,8 +50,32 @@
     </div>
 
     <script type='text/javascript'>
-      (function(m, ei, q, i, a, j, s) {
-        m[i] = m[i] || function() {
+      window.grtVersion = "绿灯出行 版权所有";
+      window.cdn = "";
+      window.grtConfig = JSON.stringify({
+        site: "https://www.greentern.net",
+        title: "Greentern - 绿灯科学上网",
+        alipay: true,
+        paypal: false,
+        paypalMode: "live",
+        macAccount: false,
+        themePrimary: "green",
+        themeAccent: "pink",
+        browserColor: "#4CAF50"
+      });
+    </script>
+    <script src="/libs/bundle.js?v=jfdk0cwjhds9dj8dj6dakd9dk9do0"></script>
+    <script>
+      var _hmt = _hmt || [];
+      (function () {
+        var b = document.createElement("script");
+        b.src = "https://hm.baidu.com/hm.js?8f601b0ce3cf3559051fbc73c6bccb9c";
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(b, a)
+      })();
+
+      (function (m, ei, q, i, a, j, s) {
+        m[i] = m[i] || function () {
               (m[i].a = m[i].a || []).push(arguments)
             };
         j = ei.createElement(q),

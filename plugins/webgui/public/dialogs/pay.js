@@ -4,7 +4,7 @@ const cdn = window.cdn || '';
 
 app.factory('payDialog' , [ '$mdDialog', '$interval', '$timeout', '$http', ($mdDialog, $interval, $timeout, $http) => {
   const publicInfo = {
-    config: JSON.parse(window.ssmgrConfig),
+    config: JSON.parse(window.grtConfig),
     orderType: 'month',
     time: [{
       type: 'hour', name: '一小时'
@@ -49,7 +49,7 @@ app.factory('payDialog' , [ '$mdDialog', '$interval', '$timeout', '$http', ($mdD
     } else {
       publicInfo.status = 'pay';
     }
-    const env = JSON.parse(window.ssmgrConfig).paypalMode === 'sandbox' ? 'sandbox' : 'production';
+    const env = JSON.parse(window.grtConfig).paypalMode === 'sandbox' ? 'sandbox' : 'production';
       if(publicInfo.paypal[publicInfo.orderType]) {
         paypal.Button.render({
           locale: 'zh_CN',

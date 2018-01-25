@@ -2,8 +2,8 @@ const app = angular.module('app');
 
 app.controller('MainController', ['$scope', '$localStorage', '$location', '$http', '$translate', 'languageDialog', '$state',
   ($scope, $localStorage, $location, $http, $translate, languageDialog, $state) => {
-    $scope.version = window.ssmgrVersion;
-    $scope.config = JSON.parse(window.ssmgrConfig);
+    $scope.version = window.grtVersion;
+    $scope.config = JSON.parse(window.grtConfig);
     $localStorage.$default({
       admin: {},
       home: {},

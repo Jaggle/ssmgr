@@ -3,7 +3,7 @@ const window = require('window');
 const cdn = window.cdn || '';
 
 app.factory('addAccountDialog', [ '$mdDialog', '$state', '$http', ($mdDialog, $state, $http) => {
-  const macAccount = JSON.parse(window.ssmgrConfig).macAccount;
+  const macAccount = JSON.parse(window.grtConfig).macAccount;
   const publicInfo = {};
   publicInfo.status = 'choose';
   publicInfo.accountType = 'port';
