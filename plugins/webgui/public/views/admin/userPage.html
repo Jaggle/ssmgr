@@ -27,11 +27,21 @@
                       </div>
                   </md-list-item>
                   <md-divider></md-divider>
+                  <md-list-item>
+                      <div flex layout="row" layout-align="space-between center">
+                          <div flex="30">备注</div>
+                          <div flex="70" style="text-align: right;">
+                              <span style="font-size: 0.9em;">{{ user.account[0].remark}}</span>
+                          </div>
+                      </div>
+                  </md-list-item>
+                  <md-divider></md-divider>
               </md-list>
             <div flex layout="row">
                 <md-button class="md-primary" ng-click="sendEmail()">发送邮件</md-button>
                 <md-button class="md-warn" ng-click="deleteUser()">删除用户</md-button>
                 <md-button class="md-primary" ng-click="createOrder()">创建订单</md-button>
+                <md-button class="md-primary" ng-click="setRemark()">设置备注</md-button>
             </div>
             </md-card-content>
         </md-card>
