@@ -41,6 +41,7 @@ app.set('view engine', 'html');
 app.set('views', path.resolve('./plugins/webgui/views'));
 
 app.use('/libs', express.static(path.resolve('./plugins/webgui/libs')));
+app.use('/assets', express.static(path.resolve('./plugins/webgui/assets')));
 app.use('/public', express.static(path.resolve('./plugins/webgui/public')));
 
 const port = config.plugins.webgui.port || 8080;

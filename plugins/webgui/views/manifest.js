@@ -6,23 +6,23 @@ const manifest = {
   name: 'Greentern',
   icons: [
     {
-      src: '/favicon.ico',
-      type: 'image/x-icon',
+      src: '/assets/greentern_48x48.png',
+      type: 'image/png',
       sizes: '48x48'
     },
     {
-      src: '/favicon.ico',
-      type: 'image/x-icon',
+      src: '/assets/greentern_128x128.png',
+      type: 'image/png',
       sizes: '128x128'
     },
     {
-      src: '/favicon.ico',
-      type: 'image/x-icon',
+      src: '/assets/greentern_144x144.png',
+      type: 'image/png',
       sizes: '144x144'
     },
     {
-      src: '/favicon.ico',
-      type: 'image/x-icon',
+      src: '/assets/greentern_256x256.png',
+      type: 'image/png',
       sizes: '256x256'
     }
   ],

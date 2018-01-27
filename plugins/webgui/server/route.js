@@ -159,18 +159,7 @@ if(config.plugins.webgui.gcmAPIKey && config.plugins.webgui.gcmSenderId) {
 const manifest = appRequire('plugins/webgui/views/manifest').manifest;
 
 app.get('/manifest.json', (req, res) => {
-  return knex('webguiSetting').select().where({
-    key: 'base',
-  }).then(success => {
-    if(!success.length) {
-      return Promise.reject('settings not found');
-    }
-    success[0].value = JSON.parse(success[0].value);
-    return success[0].value;
-  }).then(success => {
-    manifest.name = success.title;
-    return res.json(manifest);
-  });
+  return res.json(manifest);
 });
 
 app.get('/favicon.png', (req, res) => {
