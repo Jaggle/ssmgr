@@ -189,7 +189,7 @@ exports.sendCode = (req, res) => {
   const inviteCode = req.session.inviteCode || 0;
   req.checkBody('email', 'Invalid email').isEmail();
 
-  let noAccessDomains = ['chenshichou.uu.me', 'yesp.com'];
+  let noAccessDomains = ['chenshichou.uu.me', 'yesp.com', 'kkkservice@163.com'];
   let noAccess = false;
   noAccessDomains.forEach(function (item, Index) {
     if (req.body.email.toString().toLowerCase().indexOf(item) > 0 && noAccess == false) {
