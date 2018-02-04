@@ -16,6 +16,8 @@ const createTable = async() => {
     table.string('data');
     table.integer('status');
     table.integer('autoRemove').defaultTo(0);
+    table.integer('hasSendExpireMail').defaultTo(1);
+    table.string('state').defaultTo('running');
   });
 };
 

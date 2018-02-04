@@ -189,18 +189,18 @@ exports.sendCode = (req, res) => {
   const inviteCode = req.session.inviteCode || 0;
   req.checkBody('email', 'Invalid email').isEmail();
 
-  let noAccessDomains = ['chenshichou.uu.me', 'yesp.com', 'kkkservice@163.com'];
-  let noAccess = false;
-  noAccessDomains.forEach(function (item, Index) {
-    if (req.body.email.toString().toLowerCase().indexOf(item) > 0 && noAccess == false) {
-      noAccess = true;
-    }
-  });
-  if (noAccess) {
-    logger.error('no access');
-    return res.status(403).end('no access');
-  }
-  req.getValidationResult()
+  knex('email_blackList').select()
+      .then(success => {
+        let noAccess = success.filter(f => {
+          return f.email.toLowerCase().match(req.body.email.toString().toLowerCase());
+        }).length > 0;
+        if (noAccess) {
+          return Promise.reject('no access');
+        }
+      })
+      .then(() => {
+    return req.getValidationResult()
+  })
       .then(result => {
     if(result.isEmpty) { return; }
     return Promise.reject('invalid email');
@@ -246,7 +246,7 @@ exports.sendCode = (req, res) => {
   })
       .catch(err => {
     logger.error(err);
-    const errorData = ['email in black list', 'send email out of limit', 'signup close', 'no invite'];
+    const errorData = ['email in black list', 'send email out of limit', 'signup close', 'no invite', 'no access'];
     if(errorData.indexOf(err) < 0) {
       return res.status(403).end();
     } else {
