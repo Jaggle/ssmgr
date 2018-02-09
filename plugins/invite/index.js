@@ -73,7 +73,7 @@ exports.handleInvite = async (code, email, to_port) => {
     }).where({port: from_port});
 
   await emailService.sendAccountExpiredMail(a, '用户 '+email+' 通过您的邀请码注册，因此您获得3天的免费会员！感谢您为绿灯做出的贡献！'
-      + "\n\n https://www.greentern.net");
+      + "\n\n");
 
   return true;
 };
@@ -142,7 +142,7 @@ exports.handleInvitePay = async (toPort, addDays) => {
   });
 
   await emailService.sendAccountExpiredMail(a, '用户 '+toEmail+' 通过您的邀请码注册并且续费, 因此您获得该用户续费天数的1/6, 即'+addDays+'天的免费会员！感谢您为绿灯做出的贡献！'
-      + "\n\n https://www.greentern.net");
+      + "\n\n");
 
   return true;
 };

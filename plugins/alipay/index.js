@@ -194,7 +194,7 @@ const payTmpOrder = async (orderId) => {
   await knex('account_plugin').where({id:_account.id}).update({state:'running'});
 
   // 发送邮件
-  await email.sendAccountExpiredMail(_account, '您的续期' + _limit + "天已到账！如果您的帐号是过期后续费，可能需要等待大概10分钟才能生效 \n\n https://www.greentern.net");
+  await email.sendAccountExpiredMail(_account, '您的续期' + _limit + "天已到账！如果您的帐号是过期后续费，可能需要等待大概10分钟才能生效 \n\n ");
   await checkAccount.checkServer();
   await inviteModel.handleInvitePay(aliOrder.account, parseInt(_limit/6));
 
