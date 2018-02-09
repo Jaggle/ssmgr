@@ -32,10 +32,6 @@ app
         name: '注册',
         icon: 'face',
         click: 'home.signup'
-      }, {
-        name: '价格',
-        icon: 'attach_money',
-        click : 'home.price'
       }];
       $scope.menuClick = (index) => {
         $mdSidenav('left').close();
