@@ -207,7 +207,13 @@ exports.sendCode = (req, res) => {
   })
       .then(() => {
         return knex('invite_user').select().where({code:inviteCode}).then(success => {
-          if (success.length) { return ; }
+          if (success.length) {
+            return knex('invite_record').select().where({code:inviteCode}).then(success => {
+              if (success.length) {
+                return Promise.reject('no invite');
+              }
+            });
+          }
           return Promise.reject('no invite');
         });
       })
