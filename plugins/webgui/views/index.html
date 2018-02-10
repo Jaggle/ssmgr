@@ -53,8 +53,8 @@
       window.grtVersion = "绿灯出行 版权所有";
       window.cdn = "";
       window.grtConfig = JSON.stringify({
-        site: "http://www.greentern.net",
-        title: "Greentern - 绿灯科学上网",
+        site: "<%= grtConfig.site%>",
+        title: "<%= grtConfig.title%>",
         alipay: true,
         paypal: false,
         paypalMode: "live",
@@ -65,28 +65,6 @@
       });
     </script>
     <script src="/libs/bundle.js?v=3didudjdj8dj6dakd9dk9do0"></script>
-    <script>
-      var _hmt = _hmt || [];
-      (function () {
-        var b = document.createElement("script");
-        b.src = "https://hm.baidu.com/hm.js?8f601b0ce3cf3559051fbc73c6bccb9c";
-        var a = document.getElementsByTagName("script")[0];
-        a.parentNode.insertBefore(b, a)
-      })();
-
-      (function (m, ei, q, i, a, j, s) {
-        m[i] = m[i] || function () {
-              (m[i].a = m[i].a || []).push(arguments)
-            };
-        j = ei.createElement(q),
-            s = ei.getElementsByTagName(q)[0];
-        j.async = true;
-        j.charset = 'UTF-8';
-        j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
-        s.parentNode.insertBefore(j, s);
-      })(window, document, 'script', '_MEIQIA');
-      _MEIQIA('entId', 96478);
-    </script>
 </body>
 
 </html>

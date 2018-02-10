@@ -239,7 +239,12 @@ const homePage = (req, res) => {
     if (req.query.ref) {
       req.session.inviteCode = req.query.ref;
     }
+    let grtConfig = {
+      site: config.plugins.webgui.site,
+      title: success.title
+    };
     return res.render('index', {
+      grtConfig,
       title: success.title,
       version,
       cdn,
