@@ -2,6 +2,7 @@ const app = angular.module('app');
 
 app.controller('MainController', ['$scope', '$localStorage', '$location', '$http', '$translate', 'languageDialog', '$state',
   ($scope, $localStorage, $location, $http, $translate, languageDialog, $state) => {
+    $localStorage.language = 'en-US';
     $scope.version = window.grtVersion;
     $scope.config = JSON.parse(window.grtConfig);
     $localStorage.$default({

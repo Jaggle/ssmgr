@@ -6,17 +6,17 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="<%= title%>">
+    <meta name="apple-mobile-web-app-title" content="<%= grtConfig.title%>">
     <meta name="msapplication-TileImage" content="/favicon.ico">
-    <meta name="msapplication-TileColor" content="<%= config.browserColor%>">
-    <meta name="theme-color" content="<%= config.browserColor%>">
+    <meta name="msapplication-TileColor" content="<%= grtConfig.browserColor%>">
+    <meta name="theme-color" content="<%= grtConfig.browserColor%>">
     <link rel="apple-touch-startup-image" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.ico">
     <link rel="stylesheet" href="<%= cdn%>/libs/style.css">
     <link rel="stylesheet" href="<%= cdn%>/libs/angular-material.min.css">
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="manifest" href="/manifest.json">
-    <title><%= title%></title>
+    <title><%= grtConfig.title%></title>
     <base href="/">
 </head>
 
@@ -51,7 +51,7 @@
 
     <script type='text/javascript'>
       window.grtVersion = "绿灯出行 版权所有";
-      window.cdn = "";
+      window.cdn = "<%= cdn%>";
       window.grtConfig = JSON.stringify({
         site: "<%= grtConfig.site%>",
         title: "<%= grtConfig.title%>",
@@ -59,9 +59,9 @@
         paypal: false,
         paypalMode: "live",
         macAccount: false,
-        themePrimary: "green",
-        themeAccent: "pink",
-        browserColor: "#4CAF50"
+        themePrimary: "<%= grtConfig.themePrimary%>",
+        themeAccent: "<%= grtConfig.themeAccent%>",
+        browserColor: "<%= grtConfig.browserColor%>"
       });
     </script>
     <script src="/libs/bundle.js?v=3didudjdj8dj6dakd9dk9do0"></script>

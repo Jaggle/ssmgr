@@ -244,13 +244,8 @@ const homePage = (req, res) => {
       title: success.title
     };
     return res.render('index', {
-      grtConfig,
-      title: success.title,
-      version,
+      grtConfig: configForFrontend,
       cdn,
-      analytics,
-      config: configForFrontend,
-      paypal: !!(config.plugins.paypal && config.plugins.paypal.use),
     });
   });
 };
