@@ -21,6 +21,7 @@ app.factory('baiduApi', [() => {
       s.parentNode.insertBefore(j, s);
     })(window, document, 'script', '_MEIQIA');
     _MEIQIA('entId', 96478);
+    _MEIQIA('language','en')
   };
 
   return { doMyVendor };
