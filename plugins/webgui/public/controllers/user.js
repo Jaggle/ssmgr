@@ -351,7 +351,6 @@ app
   $scope.setTitle('购买');
   $scope.currentPrice = null;
   $scope.products = [
-      {title: '1个月/8元', price: 8},
       {title: '3个月/23元', price: 23},
       {title: '半年/45元', price: 45},
       {title: '一年/81元', price: 81},
