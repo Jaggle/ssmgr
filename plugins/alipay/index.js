@@ -196,7 +196,7 @@ const payTmpOrder = async (orderId) => {
   // 发送邮件
   await email.sendAccountExpiredMail(_account, '您的续期' + _limit + "天已到账！如果您的帐号是过期后续费，可能需要等待大概10分钟才能生效 \n\n ");
   await checkAccount.checkServer();
-  await inviteModel.handleInvitePay(aliOrder.account, parseInt(_limit/6));
+  //await inviteModel.handleInvitePay(aliOrder.account, parseInt(_limit/6));
 
   return await knex('alipay').update({ status: 'FINISH' }).where({
     orderId: orderId,
