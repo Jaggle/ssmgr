@@ -228,11 +228,11 @@ const checkServer = async (force) => {
               if(port.exist(a.port) ) {
                 delPort(a, s);
               }
-              return 1;
+              return 0;
             } else if (flow >= 0 && !isMultiServerFlow && flow >= data.flow * s.scale) {
               await knex('account_plugin').where({id:a.id}).update({state:'flow_over'});
               port.exist(a.port) && delPort(a, s);
-              return 1;
+              return 0;
             } else if(data.create + data.limit * timePeriod <= Date.now() || data.create >= Date.now()) {
               await knex('account_plugin').where({id:a.id}).update({state:'expire'});
               if(port.exist(a.port) && s.id <= 4) {
