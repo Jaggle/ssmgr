@@ -6,7 +6,7 @@ require('./services/preloadService.js');
 require('./services/adminService.js');
 require('./services/homeService.js');
 require('./services/userService.js');
-require('./services/baiduService.js');
+//require('./services/baiduService.js');
 // require('./services/websocketService.js');
 
 require('./configs/index.js');

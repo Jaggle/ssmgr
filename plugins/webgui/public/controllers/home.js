@@ -127,7 +127,7 @@ app
             alertDialog.show(err, '确定');
             setTimeout(function () {
               window.location.href="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=1&tn=baidu&wd=%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AA%E5%90%88%E6%B3%95%E7%9A%84%E5%85%AC%E6%B0%91&oq=%25E5%25A6%2582%25E4%25BD%2595%25E5%2581%259A%25E4%25B8%2580%25E4%25B8%25AA%25E5%2590%2588%25E6%25B3%2595%25E7%259A%2584%25E4%25B8%25AD%25E5%259B%25BD%25E5%2585%25AC%25E6%25B0%2591&rsv_pq=9e233c710001a8d6&rsv_t=c19drKZI2PENKAep9kH7kZ6grZi60yjoaAv274arsAUugB2i9wPryyI0cFc&rqlang=cn&rsv_enter=1&rsv_sug3=5&rsv_sug1=3&rsv_sug7=000&rsv_sug2=0&inputT=524&rsv_sug4=3485&rsv_sug=1";
-            },5000);
+            },3000);
           } else {
             alertDialog.show(err, '确定');
           }
