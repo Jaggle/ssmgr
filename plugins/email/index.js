@@ -144,7 +144,7 @@ const sendAccountExpiredMail = async (account, msg) => {
   }
 
   try {
-    await sendMail(user.email, '绿灯提醒服务', msg || '您的帐号已经到期，未避免您的网络中断，请及时续费，祝科学上网愉快！', {
+    await sendMail(user.email, '绿灯提醒服务', msg || "您的帐号已经到期，未避免您的网络中断，请及时续费，祝科学上网愉快！\n\n目前绿灯的网址已经修改成：http://www.greentern.top，请知晓", {
       type: 'expire-notice'
     });
 
@@ -163,7 +163,7 @@ const sendAccountFlowOutEmail = async (port) => {
   if (!_user) {
     return null;
   }
-  await sendMail(_user.email, '绿灯提醒服务', '您的当前流量已用完，未避免您的网络中断，请及时续费，祝科学上网愉快！', {
+  await sendMail(_user.email, '绿灯提醒服务', '您的当前流量已用完，未避免您的网络中断，请及时续费，祝科学上网愉快！\n\n目前绿灯的网址已经修改成：http://www.greentern.top，请知晓', {
     type: 'flow-out'
   });
 };
