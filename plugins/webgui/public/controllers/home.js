@@ -39,8 +39,8 @@ app
       };
     }
   ])
-  .controller('HomeIndexController', ['$scope', '$state', 'baiduApi',
-    ($scope, $state, baiduApi) => {
+  .controller('HomeIndexController', ['$scope', '$state',
+    ($scope, $state) => {
       $scope.icons = [{
         icon: 'flash_on',
         title: '富强民主，文明和谐',
@@ -57,7 +57,7 @@ app
       $scope.login = () => { $state.go('home.login'); };
       $scope.signup = () => { $state.go('home.signup'); };
 
-      baiduApi.doMyVendor();
+      //baiduApi.doMyVendor();
     }
   ])
   .controller('HomeLoginController', ['$scope', '$state', 'homeApi', 'alertDialog', '$localStorage',
