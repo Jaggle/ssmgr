@@ -18,6 +18,7 @@ const createTable = async() => {
     table.integer('autoRemove').defaultTo(0);
     table.integer('hasSendExpireMail').defaultTo(1);
     table.string('state').defaultTo('running');
+    table.string('remark').defaultTo('');
   });
 };
 
